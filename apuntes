@@ -1,0 +1,4181 @@
+
+Gemini
+Preparación Exprés de Examen Python
+https://share.gemini.google/vnsyk9SiSg0s
+
+
+Sección 1 - Nivel básico
+
+Ejercicio B1 - Ficha de empleado del equipo de datos
+
+El departamento de RR. HH. quiere dejar de gestionar las fichas de empleados con diccionarios sueltos. Crea la clase Empleado:
+
+Constructor con nombre, departamento y salario_bruto (anual, en euros). Además crea el atributo proyectos, que empieza siendo una lista vacía.
+Método asignar_proyecto(proyecto): añade el proyecto a la lista solo si no estaba ya asignado.
+Método salario_neto_mensual(retencion=0.15): aplica la retención al salario bruto, lo reparte en 14 pagas y lo devuelve redondeado a 2 decimales.
+__str__ con el formato "Lucía Ortega (Data Platform) · 2 proyectos". Código de prueba:
+lucia = Empleado("Lucía Ortega", "Data Platform", 42000)mario = Empleado("Mario Gil", "BI", 35000)lucia.asignar_proyecto("Migración a Lakehouse")lucia.asignar_proyecto("Catálogo de datos")lucia.asignar_proyecto("Migración a Lakehouse")print(lucia)print(mario)print(lucia.proyectos)print(lucia.salario_neto_mensual())print(lucia.salario_neto_mensual(0.20))print(mario.salario_neto_mensual())
+
+Salida esperada:
+
+Lucía Ortega (Data Platform) · 2 proyectos
+
+Mario Gil (BI) · 0 proyectos
+
+['Migración a Lakehouse', 'Catálogo de datos']
+
+2550.0
+
+2400.0
+
+2125.0
+
+Vamos a estructurar este ejercicio en 4 pasos sencillos para construir la clase poco a poco:
+
+Creación de la clase y el constructor (__init__)
+
+Método para añadir proyectos (asignar_proyecto)
+
+Cálculo del salario (salario_neto_mensual)
+
+Formato de texto (__str__)
+
+Paso 1: Definir la clase y su constructor (__init__)
+El constructor es la función especial def __init__(self, ...) que se ejecuta automáticamente cuando creas un objeto (como Empleado(...)). Dentro usas self.nombre_atributo = valor para guardar los datos de ese objeto.
+
+Para este primer paso necesitamos recibir tres parámetros en el constructor:
+
+nombre
+
+departamento
+
+salario_bruto
+
+Y dentro, además de guardar esos tres datos, debemos crear un atributo self.proyectos que empiece como una lista vacía [].
+
+Intenta escribir la estructura de la clase y su método __init__ con lo que recuerdes. Pega aquí tu código aunque creas que tiene fallos y lo revisamos juntos.
+
+def __init__(self, nombre, departamento,, salario_bruto)
+
+self.nombre = Lucia Ortega
+
+self.departamento = Data Platform
+
+self.salario_bruto = 4200
+
+¡Muy buen intento! Estás captando la estructura básica de asignar atributos con self, que es lo más importante al principio.
+
+Vamos a corregir cuatro detalles clave en este código antes de pasar al siguiente paso:
+
+La cabecera de la clase y la sintaxis del método:
+
+Falta envolver el código en la clase: class Empleado:.
+
+En (self, nombre, departamento,, salario_bruto) se ha colado una doble coma ,.
+
+En Python, la línea de def ... siempre debe terminar con dos puntos : y el código de dentro debe estar indentado (con sangría/espacios).
+
+Parámetros vs. Valores fijos:
+
+Has escrito self.nombre = Lucia Ortega. El problema de ponerlo así es que todos los empleados que crees se llamarían "Lucia Ortega" (además de que faltarían las comillas para ser texto).
+
+Para que la clase sirva tanto para Lucía como para Mario, asignamos la variable que entra por parámetro: self.nombre = nombre. Lo mismo para departamento y salario_bruto.
+
+Falta el atributo de la lista de proyectos:
+
+El enunciado pedía un atributo proyectos que empiece siendo una lista vacía: self.proyectos = [].
+
+Inténtalo de nuevo aplicando estas correcciones
+La estructura general debería verse así:
+
+Python
+class Empleado:
+    def __init__(self, nombre, departamento, salario_bruto):
+        self.nombre = nombre
+        # Asigna departamento aquí...
+        # Asigna salario_bruto aquí...
+        # Inicializa proyectos como lista vacía aquí...
+Corrige tu código e inténtalo de nuevo. ¡Vas por muy buen camino!
+
+class Empleado:
+
+    def __init__(self, nombre, departamento, salario_bruto):
+
+        self.nombre = nombre
+
+      self.departamento = departamento
+
+self.salario_bruto = salario
+
+self.proyectos = []
+
+¡Muy bien! Has captado perfectamente la idea de usar los parámetros y has añadido self.proyectos = [] como una lista vacía.
+
+Solo quedan dos detalles por corregir:
+
+Nombre de la variable: En los parámetros pusiste salario_bruto, pero en la asignación escribiste = salario. Tienen que coincidir exactamente: self.salario_bruto = salario_bruto.
+
+Indentación (sangría): En Python, la sangría es obligatoria. Todo lo que forme parte de __init__ debe ir alineado con el mismo margen a la izquierda.
+
+El Paso 1 corregido queda así:
+
+Python
+class Empleado:
+    def __init__(self, nombre, departamento, salario_bruto):
+        self.nombre = nombre
+        self.departamento = departamento
+        self.salario_bruto = salario_bruto
+        self.proyectos = []
+Paso 2: Método asignar_proyecto(self, proyecto)
+Ahora vamos a añadir el método para asignar proyectos. El enunciado dice:
+
+Añade el proyecto a la lista solo si no estaba ya asignado.
+
+Pistas:
+
+Los métodos dentro de una clase reciben self como primer parámetro más los datos de entrada: def asignar_proyecto(self, proyecto):
+
+Para comprobar si un elemento no está en una lista usas: if elemento not in lista:
+
+Para añadir un elemento a una lista en Python se usa .append(elemento) (ejemplo: self.proyectos.append(...)).
+
+¿Cómo escribirías este segundo método? Inténtalo y lo revisamos.
+
+def asignar_proyecto(self, proyecto):
+
+ns como seguir
+
+¡Vas genial! La cabecera def asignar_proyecto(self, proyecto): la tienes perfecta.
+
+Para escribir el cuerpo del método, solo tienes que traducir lo que te pide el enunciado a dos líneas de código dentro:
+
+Comprobar: Ver si el proyecto no está ya en la lista.
+
+En Python se escribe: if proyecto not in self.proyectos:
+
+Añadir: Si no está, meterlo en la lista.
+
+En Python se añade a una lista con: self.proyectos.append(proyecto)
+
+Juntándolo todo, la estructura dentro de la clase queda así:
+
+Python
+    def asignar_proyecto(self, proyecto):
+        if proyecto not in self.proyectos:
+            self.proyectos.append(proyecto)
+Fíjate en dos cosas importantes:
+
+self.proyectos es la lista de proyectos que creamos en el __init__.
+
+El append va indentado (un tabulador/espacios a la derecha) dentro del if.
+
+Paso 3: Método salario_neto_mensual(self, retencion=0.15)
+Vamos a por el cálculo del salario. El enunciado dice:
+
+Aplica la retención al salario bruto, lo reparte en 14 pagas y lo devuelve redondeado a 2 decimales.
+
+Téne en cuenta estas pistas:
+
+Parámetro con valor por defecto: La cabecera empieza así: def salario_neto_mensual(self, retencion=0.15):. Si no te pasan retención, usará 0.15 por defecto.
+
+Matemáticas del salario:
+
+El salario con retención aplicada es: self.salario_bruto * (1 - retencion)
+
+Como son 14 pagas, el resultado de arriba hay que dividirlo entre 14.
+
+Redondear a 2 decimales: En Python se usa la función round(numero, 2).
+
+Devolver el valor: Todo método que calcule un dato para usarlo fuera necesita devolverlo con return.
+
+¿Cómo intentarías escribir las operaciones dentro de este método salario_neto_mensual? Pruébalo y lo pulimos juntos.
+
+def salario_neto_mensual(self, retencion=0,15):
+
+ns como seguir
+
+¡Casi lo tienes! El único detalle en la cabecera es que en Python los decimales se escriben con punto y no con coma: debe ser 0.15 en lugar de 0,15.
+
+Para escribir la lógica dentro del método, vamos a dividir la fórmula matemática en pasos muy sencillos:
+
+Las 3 partes del cálculo
+Aplicar la retención al salario bruto anual:
+Si la retención es de 0.15 (un 15%), el empleado cobra el 85% restantes (es decir, 1 - 0.15).
+
+Python
+neto_anual = self.salario_bruto * (1 - retencion)
+Dividir entre las 14 pagas:
+
+Python
+neto_mensual = neto_anual / 14
+Redondear a 2 decimales y devolver con return:
+En Python redondeamos con round(numero, decimales):
+
+Python
+return round(neto_mensual, 2)
+¿Cómo quedaría el método completo?
+Puedes juntarlo todo en una sola línea o dejarlo en dos para que sea más legible:
+
+Python
+    def salario_neto_mensual(self, retencion=0.15):
+        neto_anual = self.salario_bruto * (1 - retencion)
+        return round(neto_anual / 14, 2)
+Paso 4: Formato de texto (__str__)
+Llegamos al último paso del ejercicio. El método __str__ sirve para indicar qué texto debe devolverse cuando hacemos print(empleado).
+
+El enunciado pide este formato exacto:
+
+"Lucía Ortega (Data Platform) · 2 proyectos"
+
+Pistas para construirlo:
+
+Usamos def __str__(self):
+
+Para saber cuántos proyectos hay en la lista, usamos la función len(self.proyectos).
+
+Puedes formatear el texto fácilmente usando una f-string:
+
+Python
+f"{self.nombre} ({self.departamento}) · {len(self.proyectos)} proyectos"
+Recuerda devolver la cadena con return.
+
+Intenta escribir el método __str__ o dinos cómo juntarías la clase entera hasta aquí.
+
+dimelo anda porfa
+
+¡Sin problema, aquí lo tienes todo bien organizado!
+
+El método __str__ se escribe así:
+
+Python
+    def __str__(self):
+        return f"{self.nombre} ({self.departamento}) · {len(self.proyectos)} proyectos"
+len(self.proyectos): Cuenta cuántos elementos hay guardados en la lista de proyectos.
+
+f"..." (f-string): Nos permite meter variables directamente dentro del texto usando {}.
+
+Código completo del Ejercicio B1
+Así queda la clase entera juntando los 4 pasos, lista para copiar y probar:
+
+Python
+class Empleado:
+    def __init__(self, nombre, departamento, salario_bruto):
+        self.nombre = nombre
+        self.departamento = departamento
+        self.salario_bruto = salario_bruto
+        self.proyectos = []
+
+    def asignar_proyecto(self, proyecto):
+        if proyecto not in self.proyectos:
+            self.proyectos.append(proyecto)
+
+    def salario_neto_mensual(self, retencion=0.15):
+        neto_anual = self.salario_bruto * (1 - retencion)
+        return round(neto_anual / 14, 2)
+
+    def __str__(self):
+        return f"{self.nombre} ({self.departamento}) · {len(self.proyectos)} proyectos"
+
+
+# --- Código de prueba ---
+lucia = Empleado("Lucía Ortega", "Data Platform", 42000)
+mario = Empleado("Mario Gil", "BI", 35000)
+
+lucia.asignar_proyecto("Migración a Lakehouse")
+lucia.asignar_proyecto("Catálogo de datos")
+lucia.asignar_proyecto("Migración a Lakehouse")  # No se añade porque ya existe
+
+print(lucia)
+print(mario)
+print(lucia.proyectos)
+print(lucia.salario_neto_mensual())
+print(lucia.salario_neto_mensual(0.20))
+print(mario.salario_neto_mensual())
+¡Primer ejercicio completado! Échale un ojo con calma. Cuando quieras, pásame el enunciado del Ejercicio B2 y seguimos avanzando.
+
+Ejercicio B2 - Pool de conexiones a una base de datos
+
+El servidor PostgreSQL de producción solo admite 3 conexiones simultáneas desde los procesos ETL. Crea la clase ConexionBD:
+
+Atributo de clase MAX_CONEXIONES = 3 y atributo de clase abiertas = 0.
+Constructor con servidor. Cada conexión empieza con el atributo activa = False.
+Método abrir():
+Si la conexión ya estaba activa, devuelve "ya estaba abierta".
+Si se ha alcanzado el máximo de conexiones, devuelve "rechazada: límite alcanzado".
+En otro caso la activa, suma 1 a abiertas de la clase y devuelve "abierta".
+Método cerrar(): si estaba activa, la desactiva, resta 1 a abiertas y devuelve "cerrada"; si no, devuelve "no estaba abierta".
+Método de clase estado_pool() (con @classmethod) que devuelve "2/3 conexiones en uso". Código de prueba:
+etl_ventas = ConexionBD("pg-prod-01")etl_stock = ConexionBD("pg-prod-01")etl_crm = ConexionBD("pg-prod-01")etl_logs = ConexionBD("pg-prod-01")print(etl_ventas.abrir(), "|", etl_stock.abrir(), "|", etl_crm.abrir())print(etl_logs.abrir())print(etl_ventas.abrir())print(ConexionBD.estado_pool())print(etl_stock.cerrar())print(etl_logs.abrir())print(etl_stock.cerrar())print(ConexionBD.estado_pool())
+
+Salida esperada:
+
+abierta | abierta | abierta
+
+rechazada: límite alcanzado
+
+ya estaba abierta
+
+3/3 conexiones en uso
+
+cerrada
+
+abierta
+
+no estaba abierta
+
+3/3 conexiones en uso
+
+En este ejercicio aparece un concepto clave de Programación Orientada a Objetos: los atributos de clase.
+
+A diferencia de los atributos de instancia (que usan self y pertenecen a un solo objeto), los atributos de clase se comparten entre todos los objetos que crees de esa clase.
+
+Paso 1: Atributos de clase y constructor
+Atributos de clase: Se definen justo debajo del nombre de la clase, sin usar self.
+
+Constructor (__init__): Recibe servidor y crea self.activa = False.
+
+Ejemplo de estructura inicial:
+
+Python
+class ConexionBD:
+    # Atributos de clase (compartidos por todas las conexiones)
+    MAX_CONEXIONES = 3
+    abiertas = 0
+
+    def __init__(self, servidor):
+        self.servidor = servidor
+        self.activa = False
+Paso 2: Método abrir(self)
+Este método debe comprobar las condiciones en un orden lógico con estructuras if / elif / else:
+
+Primera comprobación: Si la conexión ya está activa (if self.activa:), devuelve "ya estaba abierta".
+
+Segunda comprobación: Si se ha alcanzado el límite (elif ConexionBD.abiertas >= ConexionBD.MAX_CONEXIONES:), devuelve "rechazada: límite alcanzado".
+
+Si pasa las comprobaciones (else):
+
+Cambia self.activa = True.
+
+Suma 1 al atributo de clase: ConexionBD.abiertas += 1.
+
+Devuelve "abierta".
+
+¿Cómo intentarías escribir el método abrir(self) siguiendo esta lógica? Inténtalo y lo revisamos paso a paso.
+
+vamos a hacer una cosa, te voy a pasar el modelo de examen q nos ha pasado el profesor, quiero q me analices el examen y me saques una nota objetiva de dificultad del examen, mi objetico va a ser comprender la mayoria de ejercicios para dentro de dos dias, quiero que seas totalmente objetivo de como ves la cosa para q pueda sacar una nota decente, no digas nada para complacerme, y mas adelante vamos viendo los ejercicios a ver como se hacen, ten en cuenta q durante el examen voy a poder tener el examen de prueba resulto y lo podré consultar, la nota de dificultad del examen ponla del 1-10
+
+Pega el modelo de examen completo cuando quieras y te daré esa nota de dificultad del 1 al 10 de forma 100% objetiva y sin paños calientes.
+
+Siendo totalmente realista contigo desde ya: asimilar la programación orientada a objetos en Python desde casi cero en dos días para entenderla a nivel profundo es prácticamente imposible. Sin embargo, el hecho de que puedas consultar el examen de prueba resuelto durante la prueba lo cambia todo a tu favor.
+
+Tu objetivo para sacar esa nota decente no debe ser aprender a programar de memoria, sino aprender a identificar los patrones de este modelo. Si en el examen real solo cambian los nombres de las clases, las variables y un poco la estructura lógica, puedes aprobar perfectamente usando tu modelo resuelto como plantilla, siempre y cuando sepas exactamente qué hace cada bloque de código y dónde tocar si te piden un pequeño cambio.
+
+Pásame el documento o los enunciados del examen de prueba. Lo analizo, te doy la nota de dificultad real y empezamos a destripar los ejercicios estratégicamente.
+
+<aside>
+
+Indicaciones generales
+
+Esta practica no hay que entregarla.
+En el examen real saldrán de 10 a 15 preguntas como máximo y serán del mismo estilo y estructura de este modelo.
+Falta añadir preguntas del tema de programación modular.
+
+</aside>
+Sección 1. Lectura de código: ¿qué se muestra por pantalla?
+
+En esta sección no hay que programar. Lee cada fragmento y escribe lo que mostrará por pantalla antes de ejecutarlo. Después, ejecútalo y comprueba si acertaste. Si no acertaste, explica con tus palabras por qué.
+
+Ejercicio 1.1 · El contador de tiendas
+
+class Tienda:
+
+total_tiendas = 0
+
+
+
+def __init__(self, nombre):
+
+self.nombre = nombre
+
+Tienda.total_tiendas += 1
+
+
+
+t1 = Tienda("Centro")
+
+t2 = Tienda("Norte")
+
+t1.total_tiendas = 10
+
+
+
+print(Tienda.total_tiendas, t1.total_tiendas, t2.total_tiendas)
+
+Pregunta extra: ¿por qué t1 y t2 no muestran el mismo número?
+
+Ejercicio 1.2 · Dos listas que parecen tres
+
+pedidos_a = [101, 102, 103]
+
+pedidos_b = pedidos_a
+
+pedidos_c = pedidos_a[:]
+
+
+
+pedidos_b.append(104)
+
+pedidos_c.append(999)
+
+
+
+print(pedidos_a)
+
+print(pedidos_b)
+
+print(pedidos_c)
+
+print(pedidos_a is pedidos_b, pedidos_a is pedidos_c, pedidos_a == pedidos_b)
+
+Ejercicio 1.3 · Filtrar o clasificar
+
+valoraciones = [4, 7, 5, 9, 3]
+
+
+
+resultado_1 = [v for v in valoraciones if v >= 5]
+
+resultado_2 = ["POSITIVA" if v >= 5 else "NEGATIVA" for v in valoraciones]
+
+
+
+print(resultado_1)
+
+print(resultado_2)
+
+Pregunta extra: ¿por qué el if está en una posición distinta en cada comprehension?
+
+Ejercicio 1.4 · Cuenta atrás
+
+def cuenta_atras(n):
+
+if n == 0:
+
+return "¡Despegue!"
+
+return str(n) + " " + cuenta_atras(n - 1)
+
+
+
+print(cuenta_atras(3))
+
+Pregunta extra: ¿qué ocurriría si se borran las dos líneas del if?
+
+Ejercicio 1.5 · Recepción de un hotel
+
+class Huesped:
+
+def bienvenida(self):
+
+return "Bienvenido"
+
+
+
+class HuespedVIP(Huesped):
+
+def bienvenida(self):
+
+return super().bienvenida() + " - Tiene champán en la habitación"
+
+
+
+class HuespedGrupo(Huesped):
+
+def bienvenida(self):
+
+return "Bienvenidos, el guía les espera en el vestíbulo"
+
+
+
+for huesped in [Huesped(), HuespedVIP(), HuespedGrupo()]:
+
+print(huesped.bienvenida())
+
+Ejercicio 1.6 · Atributos con guiones bajos
+
+class Tarjeta:
+
+def __init__(self):
+
+self.titular = "Ana"
+
+self._saldo = 500
+
+self.__pin = 1234
+
+
+
+t = Tarjeta()
+
+print(t.titular) # Línea A
+
+print(t._saldo) # Línea B
+
+print(t._Tarjeta__pin) # Línea C
+
+print(t.__pin) # Línea D
+
+Indica qué líneas funcionan, cuál produce un error y de qué tipo es ese error.
+
+Ejercicio 1.7 · Funciones que fabrican funciones
+
+def crear_etiqueta(prefijo):
+
+def etiquetar(codigo):
+
+return prefijo + "-" + str(codigo)
+
+return etiquetar
+
+
+
+factura = crear_etiqueta("FAC")
+
+albaran = crear_etiqueta("ALB")
+
+
+
+print(factura(15), albaran(7), factura(albaran(1)))
+
+Ejercicio 1.8 · La cafetería y la herencia múltiple
+
+class Bebida:
+
+def ingredientes(self):
+
+return ["café"]
+
+
+
+class ConLeche(Bebida):
+
+def ingredientes(self):
+
+return super().ingredientes() + ["leche"]
+
+
+
+class ConHielo(Bebida):
+
+def ingredientes(self):
+
+return super().ingredientes() + ["hielo"]
+
+
+
+class Frappe(ConLeche, ConHielo):
+
+def ingredientes(self):
+
+return super().ingredientes() + ["nata"]
+
+
+
+class CafeFrio(ConHielo, ConLeche):
+
+pass
+
+
+
+print(Frappe().ingredientes())
+
+print(CafeFrio().ingredientes())
+
+print([clase.__name__ for clase in Frappe.__mro__])
+
+Preguntas extra:
+
+Dentro de ConLeche, super() no llama a Bebida. ¿A qué clase llama en un objeto Frappe y por qué?
+¿Por qué "café" aparece una sola vez si ConLeche y ConHielo heredan las dos de Bebida?
+¿Por qué cambia el orden de los ingredientes en CafeFrio?
+Sección 2. Comprehensions
+
+Ejercicio 2.1 · Precios con IVA
+
+Una tienda guarda los precios sin IVA de sus productos:
+
+precios = [8.50, 12.00, 3.20, 45.90, 19.99, 7.00]
+
+Usa una sola list comprehension para obtener los precios con IVA (21 %), pero solo de los productos que cuestan más de 10 € sin IVA. Redondea cada precio a 2 decimales.
+
+Salida esperada
+
+[14.52, 55.54, 24.19]
+
+Ejercicio 2.2 · Clasificar paquetes
+
+Una empresa de mensajería tiene el peso de cada paquete en kilos:
+
+pesos = [0.5, 3.2, 12.0, 1.1, 25.4, 7.8]
+
+Crea con una list comprehension una lista en la que cada paquete aparezca como "LIGERO" si pesa menos de 5 kg o como "PESADO" en caso contrario. Después, muestra cuántos paquetes son pesados.
+
+Salida esperada
+
+['LIGERO', 'LIGERO', 'PESADO', 'LIGERO', 'PESADO', 'PESADO']
+
+Paquetes pesados: 3
+
+Ejercicio 2.3 · Ciudades sin repetir
+
+En un formulario de clientes, las ciudades se escribieron de forma poco cuidada:
+
+ciudades = ["Madrid", " madrid", "SEVILLA", "Valencia ", "sevilla", "Bilbao", "MADRID"]
+
+Con una set comprehension, obtén las ciudades distintas, sin espacios sobrantes y con solo la primera letra en mayúscula. Muestra el resultado ordenado alfabéticamente y el número de ciudades distintas.
+
+Salida esperada
+
+['Bilbao', 'Madrid', 'Sevilla', 'Valencia']
+
+Ciudades distintas: 4
+
+Ejercicio 2.4 · Butacas libres en un cine
+
+Un cine guarda cuántas butacas quedan libres en cada sala para la sesión de esta noche:
+
+butacas_libres = {"Sala 1": 0, "Sala 2": 34, "Sala 3": 6, "Sala 4": 0, "Sala 5": 120}
+
+Con comprehensions, crea:
+
+Una lista con los nombres de las salas completas (0 butacas libres). Para esta usa una list comprehension.
+Un diccionario que asocie cada sala con un estado:
+"COMPLETA" si tiene 0 butacas libres;
+"ÚLTIMAS PLAZAS" si tiene menos de 10;
+"DISPONIBLE" en cualquier otro caso.
+Un diccionario solo con las salas que no están completas, en el que el valor sea el porcentaje de ocupación, sabiendo que todas las salas tienen 150 butacas. Redondea a 1 decimal.
+Salida esperada
+
+['Sala 1', 'Sala 4']
+
+{'Sala 1': 'COMPLETA', 'Sala 2': 'DISPONIBLE', 'Sala 3': 'ÚLTIMAS PLAZAS', 'Sala 4': 'COMPLETA', 'Sala 5': 'DISPONIBLE'}
+
+{'Sala 2': 77.3, 'Sala 3': 96.0, 'Sala 5': 20.0}
+
+Ejercicio 2.5 · Unir las cestas de la compra
+
+Un supermercado online guarda los productos de cada cesta en una lista independiente:
+
+cestas = [["pan", "leche"], ["huevos"], [], ["leche", "café", "pan"]]
+
+Con una list comprehension con dos for, crea una única lista con todos los productos de todas las cestas.
+Con una dictionary comprehension, crea un diccionario que indique cuántas veces aparece cada producto. Pista: puedes usar el método count() de las listas.
+Salida esperada
+
+['pan', 'leche', 'huevos', 'leche', 'café', 'pan']
+
+{'pan': 2, 'leche': 2, 'huevos': 1, 'café': 1}
+
+Sección 3. Programación funcional
+
+Una empresa de taxis registra los trayectos del día. Trabaja con estos datos en todos los ejercicios de la sección:
+
+carreras = [
+
+{"id": 1, "pasajero": "Raúl", "km": 12.0, "importe": 18.5, "tarjeta": True},
+
+{"id": 2, "pasajero": "Sofía", "km": 3.5, "importe": 7.0, "tarjeta": False},
+
+{"id": 3, "pasajero": "Iván", "km": 28.0, "importe": 42.0, "tarjeta": True},
+
+{"id": 4, "pasajero": "Claudia", "km": 8.0, "importe": 13.5, "tarjeta": True},
+
+{"id": 5, "pasajero": "Hugo", "km": 15.0, "importe": 24.0, "tarjeta": False},
+
+]
+
+El campo tarjeta indica si el pasajero pagó con tarjeta (True) o en efectivo (False).
+
+Ejercicio 3.1 · Funciones lambda
+
+Crea una función lambda llamada con_suplemento que reciba un importe y le sume 2.50 € de suplemento nocturno.
+Crea una función lambda llamada es_larga que reciba unos kilómetros y devuelva True si son 10 o más.
+Usa sorted() con una lambda para ordenar las carreras de más a menos kilómetros y muestra solo el nombre del pasajero.
+Salida esperada
+
+21.0
+
+False
+
+['Iván', 'Hugo', 'Raúl', 'Claudia', 'Sofía']
+
+La primera línea muestra con_suplemento(18.5) y la segunda, es_larga(3.5).
+
+Ejercicio 3.2 · map()
+
+Usa map() con una lambda para obtener:
+
+La lista de kilómetros de todas las carreras.
+Una lista de textos con el formato "Carrera 1: 18.5 €".
+Salida esperada
+
+[12.0, 3.5, 28.0, 8.0, 15.0]
+
+['Carrera 1: 18.5 €', 'Carrera 2: 7.0 €', 'Carrera 3: 42.0 €', 'Carrera 4: 13.5 €', 'Carrera 5: 24.0 €']
+
+Ejercicio 3.3 · filter()
+
+Usa filter() con una lambda para obtener:
+
+Las carreras pagadas en efectivo. Muestra solo el nombre del pasajero.
+Las carreras pagadas con tarjeta y de 10 km o más. Muestra solo su id.
+Salida esperada
+
+['Sofía', 'Hugo']
+
+[1, 3]
+
+Ejercicio 3.4 · reduce()
+
+Importa reduce desde el módulo functools y úsalo para calcular:
+
+La recaudación total del día.
+La carrera más larga. Muestra el nombre del pasajero.
+Los kilómetros recorridos en carreras pagadas con tarjeta. Combina filter() y reduce().
+Salida esperada
+
+Recaudación total: 105.0 €
+
+Carrera más larga: Iván
+
+Km pagados con tarjeta: 48.0
+
+Ejercicio 3.5 · Funciones que reciben funciones
+
+Escribe una función transformar_importes(carreras, operacion) que reciba la lista de carreras y una función, y devuelva una lista con el resultado de aplicar esa función al importe de cada carrera. No uses map(): resuélvelo con una list comprehension.
+
+Pruébala con:
+
+una función normal a_dolares(x), que convierta euros a dólares con un cambio de 1.08 y redondee a 2 decimales;
+una lambda que añada un 10 % de propina, también redondeada a 2 decimales.
+Salida esperada
+
+[19.98, 7.56, 45.36, 14.58, 25.92]
+
+[20.35, 7.7, 46.2, 14.85, 26.4]
+
+Ejercicio 3.6 · Funciones que devuelven funciones
+
+La empresa cobra un precio por kilómetro distinto según la franja horaria. Escribe una función crear_tarifa(precio_km) que devuelva otra función. Esa función recibirá unos kilómetros y devolverá el precio del trayecto, redondeado a 2 decimales.
+
+tarifa_diurna = crear_tarifa(1.10)
+
+tarifa_nocturna = crear_tarifa(1.35)
+
+
+
+print(tarifa_diurna(10))
+
+print(tarifa_nocturna(10))
+
+print([tarifa_nocturna(c["km"]) for c in carreras])
+
+Salida esperada
+
+11.0
+
+13.5
+
+[16.2, 4.73, 37.8, 10.8, 20.25]
+
+Sección 4. Recursión
+
+En esta sección no puedes usar bucles (for ni while) dentro de las funciones recursivas, salvo que el enunciado lo permita. Cada función debe tener un caso base claro.
+
+Ejercicio 4.1 · Sumar los dígitos de un código
+
+Escribe una función recursiva suma_digitos(n) que reciba un número entero positivo y devuelva la suma de sus cifras.
+
+Pista: n % 10 da la última cifra y n // 10 quita la última cifra.
+
+print(suma_digitos(4528))
+
+print(suma_digitos(7))
+
+Salida esperada
+
+19
+
+7
+
+Ejercicio 4.2 · Total de una lista de gastos
+
+Escribe una función recursiva total_gastos(gastos) que sume todos los valores de una lista. Usa la idea: el total es el primer elemento más el total del resto de la lista. El caso base es la lista vacía.
+
+print(total_gastos([12.5, 30, 7.5, 50]))
+
+print(total_gastos([]))
+
+Salida esperada
+
+100.0
+
+0
+
+Ejercicio 4.3 · ¿Es un palíndromo?
+
+Un palíndromo es una palabra que se lee igual al derecho y al revés. Escribe una función recursiva es_palindromo(texto) que devuelva True o False.
+
+Pista: compara el primer y el último carácter y, si coinciden, vuelve a llamar a la función con el texto sin esos dos caracteres.
+
+print(es_palindromo("reconocer"))
+
+print(es_palindromo("radar"))
+
+print(es_palindromo("python"))
+
+Salida esperada
+
+True
+
+True
+
+False
+
+Ejercicio 4.4 · Cajas dentro de cajas
+
+Un almacén prepara envíos en los que unas cajas pueden ir dentro de otras cajas. Cada caja se representa con una lista y cada artículo con un número que indica su peso en kilos:
+
+envio = [2, [3, 1], [[4, 5], 2], [], 6]
+
+En este envío hay una caja exterior con un artículo de 2 kg, una caja con dos artículos, una caja que contiene otra caja, una caja vacía y un artículo de 6 kg.
+
+Escribe una función recursiva peso_total(caja) que devuelva los kilos que pesa todo el contenido.
+Escribe una función recursiva contar_articulos(caja) que devuelva cuántos artículos hay en total. Las cajas no cuentan como artículos.
+Pista: usa isinstance(elemento, list) para saber si un elemento es una caja. En este ejercicio sí puedes usar un for para recorrer el contenido de cada caja, porque las cajas interiores se tratan con la llamada recursiva.
+
+Salida esperada
+
+Peso total: 23 kg
+
+Número de artículos: 7
+
+Ejercicio 4.5 · Iterativo frente a recursivo
+
+Una persona ahorra dinero en una cuenta que da un 2 % de interés al año. Escribe dos funciones que calculen el dinero que tendrá tras n años, partiendo de un capital inicial:
+
+ahorro_iterativo(capital, anios), con un bucle;
+ahorro_recursivo(capital, anios), sin bucles.
+Redondea el resultado a 2 decimales al mostrarlo.
+
+print(round(ahorro_iterativo(1000, 5), 2))
+
+print(round(ahorro_recursivo(1000, 5), 2))
+
+Salida esperada
+
+1104.08
+
+1104.08
+
+Pregunta: ¿qué ocurriría con la versión recursiva si se llamara con anios = 5000?
+
+Sección 5. Clases y objetos
+
+Ejercicio 5.1 · Artículos de una tienda de deportes
+
+Crea una clase Articulo con:
+
+Atributos de instancia: nombre, precio y stock. El stock tiene valor por defecto 0.
+Método valor_inventario(): devuelve el precio multiplicado por el stock.
+Método vender(cantidad):si hay stock suficiente, lo resta y devuelve True;
+si no lo hay, no cambia nada y devuelve False.
+Método reponer(cantidad): suma unidades al stock.
+Método __str__: devuelve un texto como Balón de fútbol | 25.0 € | 10 uds.
+a1 = Articulo("Balón de fútbol", 25.0, 10)
+
+a2 = Articulo("Cinta de pádel", 9.5)
+
+
+
+print(a1)
+
+print(a2)
+
+print(a1.vender(3))
+
+print(a2.vender(1))
+
+a2.reponer(20)
+
+print(a1)
+
+print(a2)
+
+print(a1.valor_inventario(), a2.valor_inventario())
+
+Salida esperada
+
+Balón de fútbol | 25.0 € | 10 uds.
+
+Cinta de pádel | 9.5 € | 0 uds.
+
+True
+
+False
+
+Balón de fútbol | 25.0 € | 7 uds.
+
+Cinta de pádel | 9.5 € | 20 uds.
+
+175.0 190.0
+
+Ejercicio 5.2 · Cuentas de un banco
+
+Crea una clase Cuenta con:
+
+Atributo de clase total_cuentas: cuenta cuántas cuentas se han creado.
+Atributo de clase COMISION_RETIRADA: vale 1.5 €.
+Atributos de instancia: titular y _saldo. El saldo inicial vale 0.0 si no se indica. El guion bajo indica que el saldo no debe modificarse directamente desde fuera de la clase.
+Método ingresar(importe): suma el importe al saldo solo si es positivo.
+Método retirar(importe):resta el importe más la comisión, solo si hay saldo suficiente para ambos;
+devuelve True o False según se haya podido retirar o no.
+Método consultar_saldo(): devuelve el saldo.
+Método de clase cuentas_creadas(): usa @classmethod y devuelve el valor de total_cuentas.
+Método __repr__: devuelve un texto como Cuenta('Laura', 150.0).
+c1 = Cuenta("Laura", 100.0)
+
+c2 = Cuenta("Diego")
+
+
+
+c1.ingresar(50)
+
+c1.ingresar(-20)
+
+print(c1.retirar(48.5))
+
+print(c2.retirar(10))
+
+print(c1, c2)
+
+print("Cuentas creadas:", Cuenta.cuentas_creadas())
+
+Salida esperada
+
+True
+
+False
+
+Cuenta('Laura', 100.0) Cuenta('Diego', 0.0)
+
+Cuentas creadas: 2
+
+Ejercicio 5.3 · Carrito de la compra (composición)
+
+Usando la clase Articulo del ejercicio 5.1, crea una clase Carrito que contenga una lista de líneas de compra. Cada línea es una tupla (articulo, cantidad).
+
+Método agregar(articulo, cantidad): añade una línea al carrito.
+Método total(): devuelve el importe total del carrito.
+Método resumen(): muestra cada línea con el formato 3 x Balón de fútbol = 75.0 € y, al final, el total.
+carrito = Carrito()
+
+carrito.agregar(Articulo("Balón de fútbol", 25.0, 10), 3)
+
+carrito.agregar(Articulo("Cinta de pádel", 9.5, 20), 2)
+
+carrito.agregar(Articulo("Botella deportiva", 15.0, 5), 1)
+
+carrito.resumen()
+
+Salida esperada
+
+3 x Balón de fútbol = 75.0 €
+
+2 x Cinta de pádel = 19.0 €
+
+1 x Botella deportiva = 15.0 €
+
+TOTAL: 109.0 €
+
+Ejercicio 5.4 · Lista de objetos
+
+Con la clase Articulo del ejercicio 5.1 y esta lista:
+
+catalogo = [
+
+Articulo("Esterilla", 30.0, 12),
+
+Articulo("Comba", 12.0, 0),
+
+Articulo("Bicicleta estática", 180.0, 3),
+
+Articulo("Mancuernas", 45.0, 0),
+
+]
+
+Resuelve cada apartado en una sola línea, usando comprehensions o sorted():
+
+Los nombres de los artículos sin stock.
+Un diccionario nombre → valor_inventario().
+El catálogo ordenado por precio de menor a mayor. Muestra cada artículo con print().
+Salida esperada
+
+['Comba', 'Mancuernas']
+
+{'Esterilla': 360.0, 'Comba': 0.0, 'Bicicleta estática': 540.0, 'Mancuernas': 0.0}
+
+Comba | 12.0 € | 0 uds.
+
+Esterilla | 30.0 € | 12 uds.
+
+Mancuernas | 45.0 € | 0 uds.
+
+Bicicleta estática | 180.0 € | 3 uds.
+
+Sección 6. Sobrecarga de operadores y conversión de tipos
+
+Ejercicio 6.1 · Sumar y comparar importes
+
+Crea una clase Importe que guarde una cantidad en euros. Haz que funcionen estas operaciones:
+
++ entre dos importes, que devuelve un nuevo Importe;
+== y <, que comparan las cantidades;
+str(), que muestra el importe con 2 decimales y el símbolo €;
+float(), que devuelve la cantidad como número decimal.
+a = Importe(19.99)
+
+b = Importe(5.01)
+
+c = Importe(25)
+
+
+
+total = a + b
+
+print(total)
+
+print(total == c)
+
+print(a < b)
+
+print(float(a) * 2)
+
+Salida esperada
+
+25.00 €
+
+True
+
+False
+
+39.98
+
+Ejercicio 6.2 · Lista de reproducción
+
+Crea una clase ListaReproduccion con un atributo nombre y una lista interna de canciones. Haz que funcionen estas operaciones:
+
+len(lista), que devuelve el número de canciones;
+"titulo" in lista, que indica si una canción está en la lista;
+lista += "titulo", que añade una canción y devuelve la propia lista;
+str(lista), que muestra un texto como Viaje (3 canciones).
+viaje = ListaReproduccion("Viaje")
+
+viaje += "Canción A"
+
+viaje += "Canción B"
+
+viaje += "Canción C"
+
+
+
+print(viaje)
+
+print(len(viaje))
+
+print("Canción B" in viaje)
+
+print("Canción Z" in viaje)
+
+Salida esperada
+
+Viaje (3 canciones)
+
+3
+
+True
+
+False
+
+Ejercicio 6.3 · Precios escritos a mano
+
+Un restaurante recibe los precios de su carta como texto, con coma decimal y el símbolo del euro, por ejemplo "12,50 €".
+
+Crea una clase Precio que guarde el valor en euros como número decimal.
+Añade un método estático desde_texto(texto) que reciba un texto como "7,25 €" y devuelva un objeto Precio.
+Haz que:
+float(precio) devuelva el valor en euros;
+bool(precio) devuelva False si el precio es 0 (plato gratuito) y True en caso contrario;
+str(precio) muestre el formato 7.25 €, con 2 decimales.
+carta = ["12,50 €", "0,00 €", "7,25 €", "18,00 €"]
+
+precios = [Precio.desde_texto(t) for t in carta]
+
+
+
+print([float(p) for p in precios])
+
+print("Total carta:", sum(float(p) for p in precios))
+
+print("Platos gratuitos:", len([p for p in precios if not p]))
+
+print(precios[2])
+
+Salida esperada
+
+[12.5, 0.0, 7.25, 18.0]
+
+Total carta: 37.75
+
+Platos gratuitos: 1
+
+7.25 €
+
+Sección 7. Herencia, polimorfismo y herencia múltiple
+
+Ejercicio 7.1 · Peajes de una autopista
+
+Una autopista cobra peajes distintos según el tipo de vehículo.
+
+Crea una superclase Vehiculo con los atributos matricula y kilometros, y un método peaje() que devuelva 0.10 € por kilómetro.
+Crea estas subclases, que sobrescriben peaje():
+Moto: paga la mitad que un vehículo normal;
+Camion: tiene un atributo adicional ejes y paga lo mismo que un vehículo normal más 2 € por cada eje. Usa super() tanto en el constructor como en peaje().
+Crea una lista con un Vehiculo, una Moto y un Camion y recórrela con un único bucle, mostrando la matrícula y el peaje redondeado a 2 decimales.
+Muestra el total recaudado.
+vehiculos = [
+
+Vehiculo("1234-ABC", 100),
+
+Moto("5678-DEF", 100),
+
+Camion("9012-GHI", 100, 4),
+
+]
+
+Salida esperada
+
+1234-ABC → 10.0 €
+
+5678-DEF → 5.0 €
+
+9012-GHI → 18.0 €
+
+Total recaudado: 33.0 €
+
+Pregunta: ¿en qué parte de tu código se aplica el polimorfismo?
+
+Ejercicio 7.2 · Suscripciones de una plataforma de series
+
+Una plataforma de series ofrece varios tipos de suscripción.
+
+Crea una superclase Suscripcion con usuario y cuota_base, y los métodos:
+precio_mensual(), que devuelve la cuota base;
+ficha(), que devuelve "<usuario> (<tipo>): <precio> €". <tipo> es el nombre de la clase y <precio> se muestra con 2 decimales. Pista: type(self).__name__.
+Crea estas subclases:
+Familiar: recibe además perfiles_extra y cuesta la cuota base más 3 € por cada perfil extra;
+Anual: tiene un 15 % de descuento sobre la cuota base;
+ConAnuncios: cuesta el 60 % de la cuota base.
+Recorre la lista de suscripciones mostrando la ficha de cada una y calcula los ingresos mensuales totales con sum() y una comprehension.
+suscripciones = [
+
+Suscripcion("Carlos", 12),
+
+Familiar("Lucía", 12, 2),
+
+Anual("Sergio", 12),
+
+ConAnuncios("Nerea", 12),
+
+]
+
+Salida esperada
+
+Carlos (Suscripcion): 12.00 €
+
+Lucía (Familiar): 18.00 €
+
+Sergio (Anual): 10.20 €
+
+Nerea (ConAnuncios): 7.20 €
+
+Ingresos mensuales: 47.40 €
+
+Ejercicio 7.3 · Impresora multifunción (herencia múltiple)
+
+Crea una clase EquipoOficina con un atributo modelo y un método encender() que muestre "<modelo>: encendido".
+Crea dos clases que hereden de EquipoOficina:
+Impresora, con un método imprimir(documento) que muestre "Imprimiendo <documento>";
+Escaner, con un método escanear(documento) que muestre "Escaneando <documento>".
+Crea una clase Multifuncion que herede de Impresora y de Escaner, con un método fotocopiar(documento) que reutilice los dos anteriores.
+Además, cada clase debe sobrescribir un método descripcion() que use super(), para que en un objeto Multifuncion se obtenga la descripción completa.
+equipo = Multifuncion("OfiPro 300")
+
+equipo.encender()
+
+equipo.fotocopiar("contrato.pdf")
+
+print(equipo.descripcion())
+
+print([clase.__name__ for clase in Multifuncion.__mro__])
+
+Salida esperada
+
+OfiPro 300: encendido
+
+Escaneando contrato.pdf
+
+Imprimiendo contrato.pdf
+
+Equipo de oficina + Escáner + Impresora + Multifunción
+
+['Multifuncion', 'Impresora', 'Escaner', 'EquipoOficina', 'object']
+
+Pregunta: explica con tus palabras por qué la descripción sale en ese orden. Relaciónalo con el MRO que se muestra en la última línea.
+
+Ejercicio 7.4 · Permisos de usuarios en una aplicación (herencia múltiple con super())
+
+Una aplicación de gestión de contenidos tiene varios tipos de usuario. Cada tipo suma permisos a los del tipo del que hereda.
+
+Parte A. Crear las clases
+
+ClaseHereda dePermiso que añadeUsuario—"leer"EditorUsuario"editar"ModeradorUsuario"borrar comentarios"AdministradorEditor y Moderador, en ese orden"gestionar usuarios"Requisitos:
+
+Todas las clases reciben solo el parámetro nombre. Usuario lo guarda como atributo.
+El constructor de cada clase llama primero a super().__init__(nombre) y después muestra "Configurando <Clase>". Usuario no llama a super() y solo muestra su mensaje.
+Cada clase tiene un método permisos() que devuelve la lista de permisos. Las subclases no repiten los permisos de sus padres: los obtienen con super().permisos() y les añaden el suyo.
+Usuario tiene además un método puede(accion) que devuelve True si la acción está en self.permisos().
+Parte B. Probar la clase
+
+admin = Administrador("Marina")
+
+print(admin.permisos())
+
+print(admin.puede("borrar comentarios"), admin.puede("borrar la base de datos"))
+
+print([clase.__name__ for clase in Administrador.__mro__])
+
+Salida esperada
+
+Configurando Usuario
+
+Configurando Moderador
+
+Configurando Editor
+
+Configurando Administrador
+
+['leer', 'borrar comentarios', 'editar', 'gestionar usuarios']
+
+True False
+
+['Administrador', 'Editor', 'Moderador', 'Usuario', 'object']
+
+Parte C. Preguntas
+
+¿Por qué "Configurando Usuario" aparece una sola vez, si Editor y Moderador llaman los dos a super().__init__()?
+Cambia temporalmente Editor.permisos() para que devuelva directamente ["leer", "editar"], sin usar super(). ¿Qué permiso pierde el administrador? ¿Por qué?
+Cambia el orden de la herencia a class Administrador(Moderador, Editor). ¿Qué cambia en la salida?
+Sección 8. Refactorización: de código espagueti a clases
+
+Una agencia de viajes tiene un programa que funciona, pero está escrito todo seguido. Tiene listas con posiciones difíciles de recordar, muchos if/elif según el tipo de reserva y cálculos repetidos. Cada vez que la agencia quiere vender un nuevo tipo de reserva hay que tocar el programa en varios sitios.
+
+Tu tarea es reorganizarlo usando clases, objetos, herencia y polimorfismo, sin cambiar lo que muestra por pantalla.
+
+Parte A. Analizar el código original
+
+Copia el código, ejecútalo y anota su salida. No lo modifiques todavía.
+
+# Programa original de la agencia de viajes
+
+# Cada reserva: [tipo, cliente, cantidad, precio_unitario, destino]
+
+reservas = [
+
+["vuelo", "Ana López", 2, 120.0, "Madrid-Roma"],
+
+["hotel", "Luis Pérez", 3, 85.0, "Hotel Mar Azul"],
+
+["tren", "Marta Gil", 1, 45.0, "Madrid-Sevilla"],
+
+["vuelo", "Pablo Ruiz", 1, 300.0, "Madrid-Nueva York"],
+
+["hotel", "Eva Sanz", 2, 140.0, "Hotel Centro"],
+
+]
+
+
+
+total = 0
+
+for r in reservas:
+
+if r[0] == "vuelo":
+
+precio = r[2] * r[3]
+
+precio = precio + 25
+
+if r[3] > 200:
+
+precio = precio + r[2] * 30
+
+print("VUELO | " + r[1] + " | " + r[4] + " | " + str(r[2]) + " pasajeros | " + str(round(precio, 2)) + " €")
+
+elif r[0] == "hotel":
+
+precio = r[2] * r[3]
+
+if r[2] >= 3:
+
+precio = precio * 0.9
+
+precio = precio + r[2] * 1.5
+
+print("HOTEL | " + r[1] + " | " + r[4] + " | " + str(r[2]) + " noches | " + str(round(precio, 2)) + " €")
+
+elif r[0] == "tren":
+
+precio = r[2] * r[3]
+
+print("TREN | " + r[1] + " | " + r[4] + " | " + str(r[2]) + " billetes | " + str(round(precio, 2)) + " €")
+
+total = total + precio
+
+
+
+print("TOTAL AGENCIA: " + str(round(total, 2)) + " €")
+
+
+
+# Contar reservas de más de 200 €: hay que repetir todos los cálculos
+
+caras = 0
+
+for r in reservas:
+
+if r[0] == "vuelo":
+
+precio = r[2] * r[3] + 25
+
+if r[3] > 200:
+
+precio = precio + r[2] * 30
+
+elif r[0] == "hotel":
+
+precio = r[2] * r[3]
+
+if r[2] >= 3:
+
+precio = precio * 0.9
+
+precio = precio + r[2] * 1.5
+
+elif r[0] == "tren":
+
+precio = r[2] * r[3]
+
+if precio > 200:
+
+caras = caras + 1
+
+
+
+print("Reservas de más de 200 €: " + str(caras))
+
+Las reglas de precio que esconde el código son:
+
+TipoCantidad significaCálculo del precioVuelopasajerospasajeros × precio + 25 € de tasas. Si el billete cuesta más de 200 €, se suman 30 € por pasajero.Hotelnochesnoches × precio. Con 3 noches o más, un 10 % de descuento. Después se suma 1.5 € por noche de tasa turística.Trenbilletesbilletes × precio.Antes de programar, responde:
+
+¿Qué significan r[2] y r[3]? ¿Es fácil saberlo sin leer el comentario?
+¿En cuántos sitios distintos está escrita la regla del precio de un hotel?
+Si mañana la agencia vende cruceros, ¿cuántas partes del programa habría que tocar?
+Parte B. Crear la superclase
+
+Crea una clase Reserva con:
+
+Atributos: cliente, destino, cantidad y precio_unitario.
+Método precio_base(): devuelve cantidad × precio unitario.
+Método precio_total(): en la superclase devuelve el precio base.
+Método unidad(): devuelve el texto de la unidad, por ejemplo "unidades".
+Método __str__: devuelve la línea completa con el formato del programa original. El tipo (VUELO, HOTEL…) se obtiene a partir del nombre de la clase, y la unidad, con unidad().
+Parte C. Crear las subclases
+
+Crea ReservaVuelo, ReservaHotel y ReservaTren. Cada una debe:
+
+sobrescribir unidad();
+sobrescribir precio_total() solo si lo necesita, reutilizando precio_base() o super().precio_total() en lugar de repetir la multiplicación.
+Pista para el tipo: si la clase se llama ReservaVuelo, puedes obtener "VUELO" con type(self).__name__.replace("Reserva", "").upper().
+
+Parte D. Crear una clase que agrupe las reservas (composición)
+
+Crea una clase Agencia que contenga una lista de reservas y tenga estos métodos:
+
+agregar(reserva);
+mostrar(), que imprime cada reserva;
+total(), que devuelve la suma de los precios totales;
+contar_superiores_a(importe), que devuelve cuántas reservas superan ese importe.
+Parte E. Reescribir el programa principal
+
+agencia = Agencia()
+
+agencia.agregar(ReservaVuelo("Ana López", "Madrid-Roma", 2, 120.0))
+
+agencia.agregar(ReservaHotel("Luis Pérez", "Hotel Mar Azul", 3, 85.0))
+
+agencia.agregar(ReservaTren("Marta Gil", "Madrid-Sevilla", 1, 45.0))
+
+agencia.agregar(ReservaVuelo("Pablo Ruiz", "Madrid-Nueva York", 1, 300.0))
+
+agencia.agregar(ReservaHotel("Eva Sanz", "Hotel Centro", 2, 140.0))
+
+
+
+agencia.mostrar()
+
+print(f"TOTAL AGENCIA:{round(agencia.total(), 2)} €")
+
+print(f"Reservas de más de 200 €:{agencia.contar_superiores_a(200)}")
+
+Salida esperada (idéntica a la del programa original)
+
+VUELO | Ana López | Madrid-Roma | 2 pasajeros | 265.0 €
+
+HOTEL | Luis Pérez | Hotel Mar Azul | 3 noches | 234.0 €
+
+TREN | Marta Gil | Madrid-Sevilla | 1 billetes | 45.0 €
+
+VUELO | Pablo Ruiz | Madrid-Nueva York | 1 pasajeros | 355.0 €
+
+HOTEL | Eva Sanz | Hotel Centro | 2 noches | 283.0 €
+
+TOTAL AGENCIA: 1182.0 €
+
+Reservas de más de 200 €: 4
+
+Parte F. Ampliación
+
+La agencia empieza a vender cruceros. La cantidad son los camarotes y el precio es camarotes × precio más un 12 % de tasas portuarias. Crea ReservaCrucero y añade esta reserva:
+
+agencia.agregar(ReservaCrucero("Jorge Vidal", "Crucero Mediterráneo", 1, 900.0))
+
+Salida esperada (solo las líneas nuevas o que cambian)
+
+CRUCERO | Jorge Vidal | Crucero Mediterráneo | 1 camarotes | 1008.0 €
+
+TOTAL AGENCIA: 2190.0 €
+
+Reservas de más de 200 €: 5
+
+Restricciones
+
+En el programa final no puede quedar ningún if/elif que pregunte por el tipo de reserva.
+No se puede usar isinstance() para decidir cómo calcular el precio.
+El cálculo de cada tipo de reserva debe estar escrito en un único sitio.
+Para añadir el crucero no debes modificar ni Reserva ni Agencia.
+Pregunta final: compara tu respuesta a la pregunta 3 de la Parte A con lo que has tenido que hacer en la Parte F. ¿Qué ha cambiado?
+
+Sección 9. Ejercicio integrador: restaurante de comida a domicilio
+
+Un restaurante quiere un pequeño programa para analizar los pedidos del día. Este ejercicio combina clases, herencia, polimorfismo, comprehensions, programación funcional y recursión.
+
+Parte A. Jerarquía de clases
+
+Crea una superclase Plato con nombre y precio, un método precio_final() que devuelva el precio y un método __str__ con el formato Nombre - 12.50 €, usando precio_final().
+Crea estas subclases:
+PlatoVegano: tiene un 10 % de descuento sobre su precio;
+PlatoGourmet: tiene un recargo fijo de 3 €.
+Parte B. Datos del día
+
+pedidos = [
+
+{"cliente": "Ana", "plato": PlatoVegano("Ensalada quinoa", 11.0), "unidades": 2},
+
+{"cliente": "Luis", "plato": Plato("Hamburguesa", 9.5), "unidades": 1},
+
+{"cliente": "Marta", "plato": PlatoGourmet("Risotto trufa", 18.0), "unidades": 1},
+
+{"cliente": "Ana", "plato": Plato("Pizza margarita", 10.0), "unidades": 3},
+
+{"cliente": "Pablo", "plato": PlatoVegano("Curry garbanzos", 12.0), "unidades": 1},
+
+]
+
+Parte C. Comprehensions
+
+Una lista con el importe de cada pedido (precio_final() × unidades), redondeado a 2 decimales.
+Un set con los clientes distintos, ordenado alfabéticamente al mostrarlo.
+Un diccionario nombre del plato → precio final de todos los platos.
+Parte D. Programación funcional
+
+Con filter(), obtén los pedidos de platos veganos. Muestra el nombre del plato. Pista: isinstance().
+Con map() y reduce(), calcula la facturación total del día.
+Crea una función crear_filtro_minimo(minimo) que devuelva otra función. Úsala para obtener los pedidos cuyo importe sea igual o superior a 20 € y muestra el nombre del cliente.
+Parte E. Recursión
+
+Escribe una función recursiva contar_unidades(pedidos) que devuelva el total de unidades vendidas, sin usar bucles.
+
+Parte F. Informe final
+
+Muestra un informe con este aspecto:
+
+=== CARTA DEL DÍA ===
+
+Ensalada quinoa - 9.90 €
+
+Hamburguesa - 9.50 €
+
+Risotto trufa - 21.00 €
+
+Pizza margarita - 10.00 €
+
+Curry garbanzos - 10.80 €
+
+
+
+Importes por pedido: [19.8, 9.5, 21.0, 30.0, 10.8]
+
+Clientes distintos: ['Ana', 'Luis', 'Marta', 'Pablo']
+
+Precios finales: {'Ensalada quinoa': 9.9, 'Hamburguesa': 9.5, 'Risotto trufa': 21.0, 'Pizza margarita': 10.0, 'Curry garbanzos': 10.8}
+
+Platos veganos pedidos: ['Ensalada quinoa', 'Curry garbanzos']
+
+Facturación total: 91.1 €
+
+Pedidos de 20 € o más: ['Marta', 'Ana']
+
+Unidades vendidas: 8
+
+Pregunta final: si mañana el restaurante añade una clase PlatoInfantil con un precio fijo de 6 €, ¿qué partes del programa tendrías que cambiar y cuáles funcionarían sin tocarlas? Justifica tu respuesta.
+
+Sección 10: Programación Modular
+
+Aquí tienes mi análisis 100 % objetivo, crudo y sin paños calientes.
+
+Nivel de dificultad real del temario: 8.5 / 10
+Si tuvieras que hacer este examen a puerta cerrada, sin apuntes y partiendo de poco conocimiento en Python, te diría que es casi imposible aprobar en dos días. El examen no es básico. Toca conceptos de nivel intermedio-avanzado que a mucha gente le cuesta semanas asimilar: herencia múltiple (MRO), cierres (closures, funciones que devuelven funciones), recursividad pura, y sobrecarga de operadores (métodos mágicos).
+
+Nivel de dificultad de TU examen (con el modelo resuelto delante): 4 / 10
+El hecho de poder tener el código resuelto cambia las reglas del juego por completo. Tu examen real no va a medir tu capacidad de crear algoritmos desde cero, sino tu capacidad de leer código, identificar patrones y adaptar plantillas. Y eso, teniendo formación técnica previa (como sé que tienes en otros entornos como UiPath o SQL), es totalmente viable en dos días.
+
+Análisis estratégico sección por sección
+Para que optimicemos estos dos días, te divido el examen en tres categorías de peligro:
+
+🟢 ZONA VERDE (Puntos fáciles, puro "copiar y adaptar")
+
+Sección 2 (Comprehensions): Es pura sintaxis. Si en el examen te piden filtrar zapatos en vez de paquetes, solo cambias la lista y la condición del if. Te las vas a sacar rápido.
+
+Sección 5 (Clases y objetos) y Sección 6 (Sobrecarga): Es rellenar plantillas. __init__ siempre es igual, __str__ siempre es igual. Solo tendrás que cambiar nombres de variables y sumas/restas.
+
+Sección 3 (Programación funcional - map/filter): Las lambda asustan al verlas, pero son mecánicas. Es saber que filter quita cosas y map transforma cosas.
+
+🟡 ZONA AMARILLA (Cuidado con los despistes)
+
+Sección 1 (Lectura de código): Aquí el profesor va a ir a pillarte. Va a poner trampas típicas de Python (referencias a memoria en listas, variables de clase vs variables de instancia). Aquí sí necesitas entender un poco el por qué de las cosas.
+
+Secciones 8 y 9 (Refactorización y Ejercicio integrador): Parecen monstruos por lo largos que son, pero en realidad son solo ejercicios de la zona verde unidos. El truco aquí será no ponerte nervioso, copiar tu plantilla y cambiar la palabra "Reserva" por "Factura" (o lo que toque) con muchísimo cuidado de no dejarte ninguna variable vieja.
+
+🔴 ZONA ROJA (No intentes entenderlo a fondo, aprende a usarlo)
+
+Sección 4 (Recursión): La recursividad vuela la cabeza al principio. No intentes comprender la filosofía de la recursión profunda en 48 horas. Céntrate en identificar la estructura: un if que frena la función (caso base) y un return que se llama a sí mismo.
+
+Sección 7 (Herencia múltiple y super()): El orden en el que Python hereda (MRO) puede ser un dolor de cabeza. Apréndete de memoria cómo funciona la estructura de super() en tu plantilla y reprodúcela tal cual.
+
+Tu plan de batalla para estos 3 días
+Tu objetivo ya no es aprender a programar en Python, tu objetivo es aprender a usar tu modelo como si fuera un manual de instrucciones.
+
+No memorices sintaxis.
+
+Aprende exactamente para qué sirve cada bloque del examen resuelto.
+
+Aprende a leer los errores que te suelta Python por pantalla. Si en el examen copias mal una sangría (indentación) o te dejas unos dos puntos :, tienes que saber arreglarlo en 10 segundos sin entrar en pánico.
+
+Dime por qué sección quieres que empecemos. Te sugiero ignorar la Sección 1 (teórica) por ahora e ir directos a "mancharnos las manos" con la Sección 2 (Comprehensions) o saltar a la Sección 5 (Clases básicas) para asentar lo que vimos en el ejercicio de los empleados. ¿Qué prefieres?
+
+vamos con la seccion 2
+
+¡Excelente elección! Las comprehensions (comprensiones) asustan un poco al principio porque condensan en una sola línea lo que normalmente haríamos en tres o cuatro, pero en cuanto veas el patrón, te van a salir solas. Es pura fórmula.
+
+La fórmula de oro de una List Comprehension (que va siempre entre corchetes []) es esta:
+
+Python
+[lo_que_quiero_guardar for cada_elemento in lista_original if condicion_que_debe_cumplir]
+Vamos a aplicarlo al Ejercicio 2.1 · Precios con IVA.
+El enunciado dice:
+
+Tienes: precios = [8.50, 12.00, 3.20, 45.90, 19.99, 7.00]
+Pide: Precios con IVA (21%), solo de los productos que cuestan más de 10€ sin IVA, redondeado a 2 decimales.
+
+Vamos a rellenar la plantilla juntos:
+
+lista_original: es precios
+
+cada_elemento: podemos llamarlo p (de precio).
+
+condicion_que_debe_cumplir: solo los mayores de 10. En código: p > 10
+
+lo_que_quiero_guardar: el precio con IVA del 21% y redondeado. Para sumarle el 21%, lo multiplicamos por 1.21. Para redondearlo a 2 decimales usamos round(numero, 2). Es decir: round(p * 1.21, 2)
+
+Sabiendo estas cuatro piezas, ¿te animas a intentar escribir la línea completa metiendo las piezas en la fórmula de oro con los corchetes [ ... ]?
+
+Pégala por aquí y vemos qué tal.
+
+[rouund(p * 1.21, 2) for p in precios if p > 10]
+
+¡Lo has clavado! Has entendido la estructura a la perfección.
+
+El único detalle es un pequeño error tipográfico: se te ha colado una "u" extra en round. Si escribes rouund en el examen, Python te dará un error de NameError diciendo que esa función no existe. Pero la lógica es de 10.
+
+El código final perfecto es:
+
+Python
+precios = [8.50, 12.00, 3.20, 45.90, 19.99, 7.00]
+precios_iva = [round(p * 1.21, 2) for p in precios if p > 10]
+print(precios_iva)
+Vamos a por el Ejercicio 2.2 · Clasificar paquetes.
+
+pesos = [0.5, 3.2, 12.0, 1.1, 25.4, 7.8]
+Pide: Una lista donde ponga "LIGERO" si pesa menos de 5 kg o "PESADO" en caso contrario. Después, contar cuántos son pesados.
+
+Aquí hay una nueva regla de oro. Cuando no queremos filtrar (es decir, no queremos eliminar elementos, sino transformarlos todos) y tenemos que elegir entre dos opciones (Ligero o Pesado), el if / else se mueve al principio de la lista, justo en "lo que quiero guardar".
+
+La fórmula cambia a esto:
+
+Python
+[opcion_A if condicion else opcion_B for cada_elemento in lista_original]
+Pistas para tu turno:
+
+Traduce la fórmula: "Guarda "LIGERO" si el peso es menor a 5, si no guarda "PESADO", para cada peso en la lista de pesos".
+
+Para la segunda parte (contar cuántos pesados hay), recuerda que las listas en Python tienen un método muy útil llamado .count("lo que buscas").
+
+¿Cómo escribirías la línea de la list comprehension y la línea para contar los pesados?
+
+vamos a pasar a q te paso el ejercicio y tu me explicas en detalle en q consiste
+
+Me parece la mejor estrategia para ir rápido y asegurarnos de que tienes plantillas perfectas para el examen.
+
+Pega aquí el ejercicio que quieras (podemos seguir con el 2.2 de los paquetes que dejamos a medias o el que prefieras). Te daré el código exacto, te explicaré qué hace cada línea y, lo más importante, te indicaré qué piezas tendrías que cambiar si te cambian el enunciado.
+
+¡Adelante!
+
+seguimos con el 2.2
+
+¡Perfecto! Cambiamos el chip a modo "plantilla de examen". Aquí tienes la solución directa del Ejercicio 2.2, cómo funciona por dentro y qué tienes que cambiar si en el examen te ponen algo parecido.
+
+El Código
+Python
+pesos = [0.5, 3.2, 12.0, 1.1, 25.4, 7.8]
+
+# 1. Crear la lista clasificando cada peso
+clasificacion = ["LIGERO" if p < 5 else "PESADO" for p in pesos]
+
+# 2. Contar cuántos son pesados
+total_pesados = clasificacion.count("PESADO")
+
+# 3. Mostrar los resultados
+print(clasificacion)
+print(f"Paquetes pesados: {total_pesados}")
+Explicación en detalle (para que lo entiendas)
+1. La list comprehension con dos opciones (if / else)
+A diferencia del ejercicio anterior donde borrábamos los que no cumplían la condición, aquí queremos mantenerlos todos pero cambiarles el nombre dependiendo de su valor.
+
+Cuando hay un if / else, la condición se pone al principio del for. Se lee casi como en inglés:
+
+"Pon "LIGERO" si p es menor que 5, si no pon "PESADO", y haz esto por cada p en pesos."
+
+2. El método .count()
+Las listas en Python tienen este truco mágico. Si pones el nombre de la lista seguido de .count("lo que sea"), Python recorre la lista y te devuelve el número exacto de veces que aparece esa palabra (o número). En este caso, le pedimos que cuente cuántas veces aparece la palabra "PESADO".
+
+3. El f"..." (f-string)
+En el último print usamos f"texto {variable}". Esto es súper útil para los exámenes porque te permite mezclar texto normal con variables sin tener que andar concatenando con el símbolo + o usando str().
+
+🚨 Tu plantilla para el examen (Patrón: "A o B")
+Si en el examen te piden que transformes una lista entera eligiendo entre dos palabras (por ejemplo: si la nota es mayor de 5 pon "APROBADO", si no "SUSPENSO"), usa siempre esta estructura:
+
+Python
+[OPCION_1 if CONDICION else OPCION_2 for variable in LISTA_ORIGINAL]
+Lo que cambiarás en el examen:
+
+OPCION_1: "LIGERO", "APROBADO", "MAYOR DE EDAD"...
+
+CONDICION: p < 5, nota >= 5, edad >= 18...
+
+OPCION_2: "PESADO", "SUSPENSO", "MENOR"...
+
+LISTA_ORIGINAL: el nombre de la lista que te den (pesos, notas, edades...).
+
+Si te preguntan cuántas veces aparece algo en una lista, simplemente usa:
+
+Python
+cantidad = nombre_de_la_lista.count("LA_PALABRA_A_BUSCAR")
+¿Ves clara la diferencia entre cuándo el if va al final (ejercicio 2.1) y cuándo va al principio con un else (este ejercicio)? Pásame el 2.3 cuando estés listo.
+
+Ejercicio 2.3 · Ciudades sin repetir
+
+En un formulario de clientes, las ciudades se escribieron de forma poco cuidada:
+
+ciudades = ["Madrid", " madrid", "SEVILLA", "Valencia ", "sevilla", "Bilbao", "MADRID"]
+
+Con una set comprehension, obtén las ciudades distintas, sin espacios sobrantes y con solo la primera letra en mayúscula. Muestra el resultado ordenado alfabéticamente y el número de ciudades distintas.
+
+Salida esperada
+
+['Bilbao', 'Madrid', 'Sevilla', 'Valencia']
+
+Ciudades distintas: 4
+
+Aquí tienes el código y la explicación del Ejercicio 2.3. Este ejercicio es un clásico de exámenes porque mezcla limpieza de datos con colecciones (sets).
+
+El Código
+Python
+ciudades = ["Madrid", " madrid", "SEVILLA", "Valencia ", "sevilla", "Bilbao", "MADRID"]
+
+# 1. Set comprehension para limpiar textos y eliminar duplicados
+ciudades_unicas = {ciudad.strip().capitalize() for ciudad in ciudades}
+
+# 2. Ordenar alfabéticamente (sorted convierte el set en lista ordenada)
+ciudades_ordenadas = sorted(ciudades_unicas)
+
+# 3. Mostrar los resultados
+print(ciudades_ordenadas)
+print(f"Ciudades distintas: {len(ciudades_ordenadas)}")
+Explicación en detalle
+1. Set Comprehension (los corchetes { })
+Fíjate que en lugar de usar [ ] como en las list comprehensions, aquí usamos llaves { }. En Python, las llaves (sin pares clave:valor) crean un Set (conjunto).
+La magia de los sets es que no admiten elementos repetidos. Si intentas meter "Madrid" tres veces, el set solo guarda uno. Por eso el enunciado te pide un set comprehension, para matar dos pájaros de un tiro: limpiar los textos y borrar los duplicados automáticamente.
+
+2. Limpieza de texto en cadena (.strip().capitalize())
+A la variable ciudad le aplicamos dos métodos seguidos (esto se llama encadenamiento):
+
+.strip(): Borra los espacios en blanco que sobran al principio y al final (convierte " madrid" y "Valencia " en "madrid" y "Valencia").
+
+.capitalize(): Pone la primera letra en mayúscula y el resto en minúsculas (convierte "SEVILLA" y "madrid" en "Sevilla" y "Madrid").
+
+Al hacer esto, todos los "Madrid" mal escritos pasan a ser exactamente "Madrid". Y como es un set, los repetidos se esfuman.
+
+3. Ordenar con sorted()
+Los sets no tienen un orden fijo (si imprimes el set directamente, las ciudades saldrán desordenadas). Para ordenarlas alfabéticamente usamos la función sorted(tu_set). Un detalle importante: sorted() siempre devuelve una lista [ ], que es justo lo que pide la salida esperada.
+
+4. Contar elementos con len()
+Para saber cuántas ciudades distintas han quedado, simplemente usamos len(ciudades_ordenadas), que nos dice la longitud (length) de la lista.
+
+🚨 Tu plantilla para el examen (Patrón: "Limpiar y Quitar Duplicados")
+Si en el examen te dan una lista llena de textos sucios (nombres de clientes, categorías de productos, etc.), con mayúsculas mezcladas o espacios raros, y te piden "elementos únicos" o "sin repetir", la plantilla es esta:
+
+Python
+# 1. Limpiar y hacer únicos con SET comprehension
+unicos = {variable.strip().MÉTODO_MAYUSCULAS() for variable in LISTA_ORIGINAL}
+
+# 2. Ordenar
+resultado = sorted(unicos)
+Lo que cambiarás en el examen:
+
+LISTA_ORIGINAL: el nombre de la lista que te den (clientes, productos...).
+
+MÉTODO_MAYUSCULAS():
+
+Usa .capitalize() si piden solo la primera en mayúscula (ej: "Hola").
+
+Usa .upper() si piden todo en mayúsculas (ej: "HOLA").
+
+Usa .lower() si piden todo en minúsculas (ej: "hola").
+
+Pásame el 2.4 cuando lo tengas. ¡Ese tiene diccionarios y es un patrón súper importante!
+
+Ejercicio 2.4 · Butacas libres en un cine
+
+Un cine guarda cuántas butacas quedan libres en cada sala para la sesión de esta noche:
+
+butacas_libres = {"Sala 1": 0, "Sala 2": 34, "Sala 3": 6, "Sala 4": 0, "Sala 5": 120}
+
+Con comprehensions, crea:
+
+Una lista con los nombres de las salas completas (0 butacas libres). Para esta usa una list comprehension.
+Un diccionario que asocie cada sala con un estado:
+"COMPLETA" si tiene 0 butacas libres;
+"ÚLTIMAS PLAZAS" si tiene menos de 10;
+"DISPONIBLE" en cualquier otro caso.
+Un diccionario solo con las salas que no están completas, en el que el valor sea el porcentaje de ocupación, sabiendo que todas las salas tienen 150 butacas. Redondea a 1 decimal.
+Salida esperada
+
+['Sala 1', 'Sala 4']
+
+{'Sala 1': 'COMPLETA', 'Sala 2': 'DISPONIBLE', 'Sala 3': 'ÚLTIMAS PLAZAS', 'Sala 4': 'COMPLETA', 'Sala 5': 'DISPONIBLE'}
+
+{'Sala 2': 77.3, 'Sala 3': 96.0, 'Sala 5': 20.0}
+
+Este ejercicio es crucial porque te enseña a iterar (recorrer) un diccionario. A diferencia de las listas donde iteramos sobre un solo valor, en los diccionarios tenemos pares de clave y valor (por ejemplo: "Sala 1" y 0).
+
+El Código
+Python
+butacas_libres = {"Sala 1": 0, "Sala 2": 34, "Sala 3": 6, "Sala 4": 0, "Sala 5": 120}
+
+# 1. List comprehension (filtrar salas completas)
+salas_completas = [sala for sala, libres in butacas_libres.items() if libres == 0]
+
+# 2. Dictionary comprehension con if/elif/else anidado (asignar estado a cada sala)
+estados = {
+    sala: "COMPLETA" if libres == 0 else ("ÚLTIMAS PLAZAS" if libres < 10 else "DISPONIBLE")
+    for sala, libres in butacas_libres.items()
+}
+
+# 3. Dictionary comprehension con filtro y cálculo matemático (porcentaje de ocupación)
+ocupacion = {
+    sala: round(((150 - libres) / 150) * 100, 1) 
+    for sala, libres in butacas_libres.items() 
+    if libres > 0
+}
+
+# Mostrar los resultados
+print(salas_completas)
+print(estados)
+print(ocupacion)
+Explicación en detalle
+El secreto de los diccionarios: .items()
+En todas las comprehensions usamos for sala, libres in butacas_libres.items(). El .items() es la magia que extrae a la vez el nombre de la sala (la clave) y el número de butacas (el valor). Si olvidas el .items() en el examen, Python fallará.
+
+1. Filtrar las claves (List Comprehension)
+Queremos quedarnos solo con el nombre de la sala (sala), así que eso es lo que ponemos al principio antes del for. Como es un filtro, el if libres == 0 va al final.
+
+2. Dictionary Comprehension (los {clave: valor} y el triple condicional)
+Para crear un diccionario, la sintaxis es parecida, pero al principio tienes que decirle cómo construir el par: clave: valor.
+
+La clave es simplemente sala.
+
+El valor es el texto. Como hay 3 opciones, tenemos que anidar los if:
+"COMPLETA" if libres == 0 else ("ÚLTIMAS PLAZAS" if libres < 10 else "DISPONIBLE")
+Se lee: Pon COMPLETA si es 0, si no (abre paréntesis), pon ÚLTIMAS PLAZAS si es menor de 10, si no pon DISPONIBLE.
+
+3. Dictionary Comprehension con matemáticas
+Igual que el anterior, creamos pares clave: valor.
+
+La clave vuelve a ser sala.
+
+El valor es el porcentaje. Si hay 150 butacas en total, las ocupadas son 150 - libres. El porcentaje es (ocupadas / total) * 100. Lo envolvemos en un round(..., 1) para sacar 1 decimal.
+
+Y como solo queremos las que no están completas, añadimos el filtro if libres > 0 al final.
+
+🚨 Tus plantillas para el examen (Iterar Diccionarios)
+Plantilla A: Extraer una lista a partir de un diccionario (Filtrando)
+
+Python
+[clave for clave, valor in DICCIONARIO.items() if valor == CONDICION]
+(También podrías extraer los valores poniendo `[valor for...])*
+
+Plantilla B: Crear un nuevo diccionario transformando el valor
+
+Python
+{clave: NUEVO_VALOR for clave, valor in DICCIONARIO.items()}
+Si piden condiciones múltiples para el NUEVO_VALOR, usa el patrón: opcion1 if condicion1 else (opcion2 if condicion2 else opcion3).
+
+Cuando quieras pasamos al 2.5, el último de esta sección.
+
+¿Quieres que desglosemos el siguiente?
+
+Explicar el Ejercicio 2.5 (Cestas)
+Ejercicio 2.5 · Unir las cestas de la compra
+
+Un supermercado online guarda los productos de cada cesta en una lista independiente:
+
+cestas = [["pan", "leche"], ["huevos"], [], ["leche", "café", "pan"]]
+
+Con una list comprehension con dos for, crea una única lista con todos los productos de todas las cestas.
+Con una dictionary comprehension, crea un diccionario que indique cuántas veces aparece cada producto. Pista: puedes usar el método count() de las listas.
+Salida esperada
+
+['pan', 'leche', 'huevos', 'leche', 'café', 'pan']
+
+{'pan': 2, 'leche': 2, 'huevos': 1, 'café': 1}
+
+Este es el último ejercicio de la Sección 2. Aquí vas a aprender un truco clásico de los exámenes: "aplanar" (flatten) una lista de listas, es decir, sacar todos los elementos de sus cajitas pequeñas y meterlos todos juntos en una caja grande.
+
+El Código
+Python
+cestas = [["pan", "leche"], ["huevos"], [], ["leche", "café", "pan"]]
+
+# 1. List comprehension con dos 'for' (Aplanar la lista)
+todos_los_productos = [producto for cesta in cestas for producto in cesta]
+
+# 2. Dictionary comprehension para contar
+conteo_productos = {producto: todos_los_productos.count(producto) for producto in todos_los_productos}
+
+# 3. Mostrar los resultados
+print(todos_los_productos)
+print(conteo_productos)
+Explicación en detalle
+1. El doble for en una List Comprehension
+Cuando tienes listas dentro de listas, necesitas dos bucles. La regla de oro aquí es el orden en el que se escriben los for: se escriben de fuera hacia dentro, exactamente igual que si lo hicieras en varias líneas.
+
+Paso A (fuera): for cesta in cestas (recorro cada cajita pequeña dentro de la grande).
+
+Paso B (dentro): for producto in cesta (recorro cada alimento dentro de la cajita pequeña).
+
+El elemento que queremos guardar es el alimento, así que ponemos producto al principio. Todo junto se lee:
+
+"Guarda el producto, buscando primero cada cesta en cestas, y luego cada producto dentro de esa cesta."
+
+2. Contar elementos con Dictionary Comprehension
+Aquí aplicamos lo que vimos en el ejercicio anterior sobre diccionarios: la estructura {clave: valor}.
+
+La clave: Es el nombre del producto.
+
+El valor: Es el número de veces que aparece. Como todos_los_productos es una lista normal, usamos el truco que vimos en el ejercicio 2.2: todos_los_productos.count(producto).
+
+El bucle: Iteramos sobre la lista plana que acabamos de crear: for producto in todos_los_productos.
+
+Nota de examen: En el bucle estamos iterando sobre 'pan' dos veces, pero como las claves de los diccionarios no se pueden repetir, Python simplemente sobreescribe 'pan': 2 encima del anterior 'pan': 2. ¡Funciona perfecto y sin errores!
+
+🚨 Tus plantillas para el examen
+Plantilla A: Aplanar listas de listas (Flatten)
+Si en el examen te dan listas dentro de listas (ej: turnos de trabajadores, categorías de productos) y te piden juntarlo todo en una sola:
+
+Python
+lista_plana = [item for sublista in LISTA_GRANDE for item in sublista]
+Plantilla B: Diccionario de frecuencias (Contar cuántas veces sale algo)
+Si te piden contar los elementos de una lista normal y guardarlos en un diccionario:
+
+Python
+frecuencias = {item: LISTA.count(item) for item in LISTA}
+¡Con esto hemos fulminado la Sección 2 (ZONA VERDE)! Tienes todas las plantillas necesarias de comprehensions.
+
+Para seguir sacando puntos fáciles, te recomiendo saltar a la Sección 5 (Clases y objetos) para asegurar la estructura básica de las clases antes de ver herencias más raras, o a la Sección 3 (Programación funcional) para ver los trucos de map y filter. ¿Por cuál seguimos?
+
+¿Qué bloque atacamos ahora?
+
+Ir a la Sección 5 (Clases y objetos)
+
+Ir a la Sección 3 (Programación funcional)
+Sección 5. Clases y objetos
+
+Ejercicio 5.1 · Artículos de una tienda de deportes
+
+Crea una clase Articulo con:
+
+Atributos de instancia: nombre, precio y stock. El stock tiene valor por defecto 0.
+Método valor_inventario(): devuelve el precio multiplicado por el stock.
+Método vender(cantidad):si hay stock suficiente, lo resta y devuelve True;
+si no lo hay, no cambia nada y devuelve False.
+Método reponer(cantidad): suma unidades al stock.
+Método __str__: devuelve un texto como Balón de fútbol | 25.0 € | 10 uds.
+a1 = Articulo("Balón de fútbol", 25.0, 10)
+
+a2 = Articulo("Cinta de pádel", 9.5)
+
+
+
+print(a1)
+
+print(a2)
+
+print(a1.vender(3))
+
+print(a2.vender(1))
+
+a2.reponer(20)
+
+print(a1)
+
+print(a2)
+
+print(a1.valor_inventario(), a2.valor_inventario())
+
+Salida esperada
+
+Balón de fútbol | 25.0 € | 10 uds.
+
+Cinta de pádel | 9.5 € | 0 uds.
+
+True
+
+False
+
+Balón de fútbol | 25.0 € | 7 uds.
+
+Cinta de pádel | 9.5 € | 20 uds.
+
+175.0 190.0
+
+Este ejercicio es la base absoluta de la programación orientada a objetos (POO). Si entiendes esta estructura, tienes medio examen en el bolsillo, porque casi todas las clases te van a pedir lo mismo: guardar datos, modificarlos y mostrarlos.
+
+El Código
+Python
+class Articulo:
+    # Constructor con valor por defecto para el stock
+    def __init__(self, nombre, precio, stock=0):
+        self.nombre = nombre
+        self.precio = precio
+        self.stock = stock
+
+    def valor_inventario(self):
+        return self.precio * self.stock
+
+    def vender(self, cantidad):
+        if self.stock >= cantidad:
+            self.stock -= cantidad  # Es lo mismo que: self.stock = self.stock - cantidad
+            return True
+        else:
+            return False
+
+    def reponer(self, cantidad):
+        self.stock += cantidad
+
+    def __str__(self):
+        return f"{self.nombre} | {self.precio} € | {self.stock} uds."
+
+# --- Código de prueba del enunciado ---
+a1 = Articulo("Balón de fútbol", 25.0, 10)
+a2 = Articulo("Cinta de pádel", 9.5)
+
+print(a1)
+print(a2)
+print(a1.vender(3))
+print(a2.vender(1))
+a2.reponer(20)
+print(a1)
+print(a2)
+print(a1.valor_inventario(), a2.valor_inventario())
+Explicación en detalle
+1. Valores por defecto en el __init__ (stock=0)
+Fíjate en cómo creamos el objeto a2 en la prueba: a2 = Articulo("Cinta de pádel", 9.5). Le pasamos el nombre y el precio, pero no le pasamos el stock. ¿Por qué no da error? Porque en el constructor pusimos stock=0. Si al crear el objeto le pasamos tres datos (como en a1), usa los tres; si solo le pasamos dos, rellena el tercero con un cero automáticamente.
+
+2. Modificar atributos (self.stock -= cantidad)
+Los métodos vender y reponer cambian el estado del objeto. Para modificar una variable de la clase, siempre tienes que poner self. delante.
+
+Para restar usamos self.stock -= cantidad.
+
+Para sumar usamos self.stock += cantidad.
+El método vender además usa un if para proteger la resta: solo resta y devuelve True si el stock es mayor o igual a lo que piden.
+
+3. El método __str__ y las f-strings
+Como vimos en el ejercicio de los empleados, __str__ es lo que se ejecuta cuando haces un print(a1). Se usa la f antes de las comillas para poder inyectar los atributos usando llaves {self.atributo} en medio del texto.
+
+🚨 Tu plantilla para el examen (Creación de Clases Básicas)
+Si en el examen te piden crear una clase normal (Libro, Vehículo, Factura...), usa esta estructura exacta:
+
+Python
+class NombreDeLaClase:
+    # 1. Constructor (si un parámetro es opcional, ponle =valor)
+    def __init__(self, param1, param2, param3=0):
+        self.param1 = param1
+        self.param2 = param2
+        self.param3 = param3
+
+    # 2. Método que calcula algo con los datos
+    def calcular_algo(self):
+        return self.param1 * self.param2
+
+    # 3. Método que modifica los datos (sumar/restar/cambiar)
+    def modificar_datos(self, cantidad):
+        if self.param3 >= cantidad:
+            self.param3 -= cantidad
+            return True
+        return False
+
+    # 4. Formato de texto
+    def __str__(self):
+        return f"{self.param1} | {self.param2} | {self.param3}"
+Copia el Ejercicio 5.2 cuando estés listo. Ahí veremos cómo manejar "Atributos de clase" (los que se comparten entre todos los objetos), que es la otra gran trampa de esta sección.
+
+y la parte de codigo de prueba del enunciado q significa?
+
+¡Buena pregunta! Entender esa parte es clave para el examen, porque es la forma en la que tú mismo compruebas que lo que has programado arriba funciona bien.
+
+En todos estos ejercicios, el profesor te da dos cosas:
+
+Las reglas de lo que tienes que programar (la clase Articulo, sus métodos, etc.).
+
+El "Código de prueba" junto con la "Salida esperada".
+
+¿Para qué sirve el Código de prueba?
+El código de prueba es como el profesor poniéndole nota a tu clase. Son las instrucciones que usan la clase que tú has creado para ver si se comporta como debe.
+
+Vamos a analizar el del Ejercicio 5.1 línea a línea para que veas qué está haciendo:
+
+Python
+# 1. Crea dos objetos usando el constructor __init__ que tú hiciste
+a1 = Articulo("Balón de fútbol", 25.0, 10) 
+a2 = Articulo("Cinta de pádel", 9.5) # A este no le pasa stock, así que usará el stock=0 por defecto
+
+# 2. Imprime los objetos. Esto llama automáticamente a tu método __str__
+print(a1) 
+print(a2) 
+
+# 3. Llama a tu método vender(). El print mostrará True o False según lo que devuelva tu método.
+print(a1.vender(3)) # Intenta vender 3 balones. Como hay 10, dirá True.
+print(a2.vender(1)) # Intenta vender 1 cinta. Como hay 0, dirá False.
+
+# 4. Llama a tu método reponer() para añadir stock a la cinta.
+a2.reponer(20) 
+
+# 5. Vuelve a imprimir los objetos para comprobar que el stock ha cambiado correctamente.
+print(a1) # Debe tener 7 balones (10 iniciales - 3 vendidos)
+print(a2) # Debe tener 20 cintas (0 iniciales + 20 repuestas)
+
+# 6. Llama a tu método valor_inventario() y hace los cálculos matemáticos
+print(a1.valor_inventario(), a2.valor_inventario()) 
+¿Qué tienes que hacer tú en el examen?
+Escribes la clase con su def __init__, sus métodos y todo lo demás.
+
+Copias y pegas el código de prueba del enunciado justo debajo de tu clase, sin tocarle ni una coma.
+
+Le das al botón de Ejecutar (Run).
+
+Comparas lo que sale en la pantalla de tu ordenador con lo que el enunciado dice que es la "Salida esperada".
+
+Si sale exactamente igual, tienes el ejercicio bien.
+
+Si sale un error rojo, es que hay un fallo de sintaxis (una sangría mal, una letra cambiada...).
+
+Si no da error pero los números o los textos no coinciden, es que la lógica matemática o de tu if dentro de la clase está mal planteada.
+
+En resumen: el código de prueba no es algo que tú tengas que inventar, es simplemente un control de calidad que el profesor te regala para que sepas si has aprobado el ejercicio o no.
+
+¿Queda más clara la utilidad de esta parte? Cuando lo veas claro, pásame el enunciado del Ejercicio 5.2.
+
+Ejercicio 5.2 · Cuentas de un banco
+
+Crea una clase Cuenta con:
+
+Atributo de clase total_cuentas: cuenta cuántas cuentas se han creado.
+Atributo de clase COMISION_RETIRADA: vale 1.5 €.
+Atributos de instancia: titular y _saldo. El saldo inicial vale 0.0 si no se indica. El guion bajo indica que el saldo no debe modificarse directamente desde fuera de la clase.
+Método ingresar(importe): suma el importe al saldo solo si es positivo.
+Método retirar(importe):resta el importe más la comisión, solo si hay saldo suficiente para ambos;
+devuelve True o False según se haya podido retirar o no.
+Método consultar_saldo(): devuelve el saldo.
+Método de clase cuentas_creadas(): usa @classmethod y devuelve el valor de total_cuentas.
+Método __repr__: devuelve un texto como Cuenta('Laura', 150.0).
+c1 = Cuenta("Laura", 100.0)
+
+c2 = Cuenta("Diego")
+
+
+
+c1.ingresar(50)
+
+c1.ingresar(-20)
+
+print(c1.retirar(48.5))
+
+print(c2.retirar(10))
+
+print(c1, c2)
+
+print("Cuentas creadas:", Cuenta.cuentas_creadas())
+
+Salida esperada
+
+True
+
+False
+
+Cuenta('Laura', 100.0) Cuenta('Diego', 0.0)
+
+Cuentas creadas: 2
+
+El Código
+Python
+class Cuenta:
+    # 1. Atributos de clase (van fuera del __init__ y sin 'self')
+    total_cuentas = 0
+    COMISION_RETIRADA = 1.5
+
+    # 2. Atributos de instancia (dentro del __init__ y con 'self')
+    def __init__(self, titular, saldo_inicial=0.0):
+        self.titular = titular
+        self._saldo = saldo_inicial
+        
+        # Cada vez que se crea una cuenta, sumamos 1 al contador global
+        Cuenta.total_cuentas += 1
+
+    def ingresar(self, importe):
+        if importe > 0:
+            self._saldo += importe
+
+    def retirar(self, importe):
+        # Calculamos cuánto se va a restar en total (importe + comisión)
+        total_a_retirar = importe + Cuenta.COMISION_RETIRADA
+        
+        if self._saldo >= total_a_retirar:
+            self._saldo -= total_a_retirar
+            return True
+        return False
+
+    def consultar_saldo(self):
+        return self._saldo
+
+    # 3. Método de clase
+    @classmethod
+    def cuentas_creadas(cls):
+        return cls.total_cuentas
+
+    # 4. Representación del objeto
+    def __repr__(self):
+        return f"Cuenta('{self.titular}', {self._saldo})"
+
+
+# --- Código de prueba del enunciado ---
+c1 = Cuenta("Laura", 100.0)
+c2 = Cuenta("Diego")
+
+c1.ingresar(50)
+c1.ingresar(-20)
+print(c1.retirar(48.5))
+print(c2.retirar(10))
+print(c1, c2)
+print("Cuentas creadas:", Cuenta.cuentas_creadas())
+Explicación en detalle (Los trucos de este ejercicio)
+Este ejercicio introduce dos conceptos trampa que suelen caer en los exámenes para ver si entiendes la diferencia entre "el molde" (la clase) y "la galleta" (el objeto).
+
+1. Atributos de Clase vs. Atributos de Instancia
+
+Atributo de Instancia: Son los que llevan self. (como self.titular). Pertenecen a un solo objeto. El titular de c1 es Laura y el de c2 es Diego.
+
+Atributo de Clase: Son variables globales compartidas por todas las cuentas. Se definen justo debajo de class Cuenta: y se accede a ellos escribiendo el nombre de la clase delante: Cuenta.total_cuentas o Cuenta.COMISION_RETIRADA. Si el banco sube la comisión a 2.0, se la sube a todas las cuentas de golpe.
+
+Truco del examen: Para contar cuántos objetos se han creado, inicializas la variable a 0 arriba (total_cuentas = 0), y dentro del __init__ le sumas 1 (Cuenta.total_cuentas += 1).
+
+2. El guion bajo _saldo (Variables "Privadas")
+En Python, poner un _ delante de una variable no hace nada mágico a nivel técnico, es un pacto entre programadores que significa: "No toques esta variable directamente desde fuera". Por eso te piden crear el método consultar_saldo() y usar self._saldo dentro de la clase para modificarlo.
+
+3. Métodos de Clase (@classmethod)
+Cuando un método no necesita leer los datos de un cliente concreto (no necesita a Laura ni a Diego), sino que responde a una pregunta general ("¿Cuántas cuentas hay en total en el banco?"), se usa @classmethod.
+En lugar de recibir self (el objeto), recibe cls (la clase entera), y devuelve cls.total_cuentas.
+
+4. __repr__ vs __str__
+Son prácticamente iguales para lo que te van a pedir. Los dos sirven para que print() muestre texto en lugar de un código raro de memoria. Usa __repr__ si te lo piden, y formatéalo exactamente igual, con tu f-string: f"Cuenta('{self.titular}', {self._saldo})".
+
+🚨 Tu plantilla para el examen (Clases con variables compartidas)
+Si el examen te pide una clase que cuente cuántos objetos hay creados o que tenga un valor general (ej: un IVA compartido, un número máximo de conexiones, una comisión), usa esto:
+
+Python
+class NombreClase:
+    # 1. VARIABLES COMPARTIDAS (Fuera del init)
+    contador_general = 0
+    VALOR_FIJO = 21
+
+    def __init__(self, param1):
+        self.param1 = param1
+        # 2. SUMAR AL CONTADOR
+        NombreClase.contador_general += 1
+
+    def metodo_normal(self):
+        # 3. USAR EL VALOR FIJO EN CÁLCULOS
+        resultado = self.param1 * NombreClase.VALOR_FIJO
+        return resultado
+
+    # 4. MÉTODO PARA LEER EL CONTADOR GENERAL
+    @classmethod
+    def total_creados(cls):
+        return cls.contador_general
+Pásame el Ejercicio 5.3 en cuanto estés listo. Es de "composición" (meter objetos dentro de otros objetos), otro patrón fundamental.
+
+Ejercicio 5.3 · Carrito de la compra (composición)
+
+Usando la clase Articulo del ejercicio 5.1, crea una clase Carrito que contenga una lista de líneas de compra. Cada línea es una tupla (articulo, cantidad).
+
+Método agregar(articulo, cantidad): añade una línea al carrito.
+Método total(): devuelve el importe total del carrito.
+Método resumen(): muestra cada línea con el formato 3 x Balón de fútbol = 75.0 € y, al final, el total.
+carrito = Carrito()
+
+carrito.agregar(Articulo("Balón de fútbol", 25.0, 10), 3)
+
+carrito.agregar(Articulo("Cinta de pádel", 9.5, 20), 2)
+
+carrito.agregar(Articulo("Botella deportiva", 15.0, 5), 1)
+
+carrito.resumen()
+
+Salida esperada
+
+3 x Balón de fútbol = 75.0 €
+
+2 x Cinta de pádel = 19.0 €
+
+1 x Botella deportiva = 15.0 €
+
+TOTAL: 109.0 €
+
+Este ejercicio trata sobre Composición, una palabra que asusta pero que significa algo muy simple: una clase que guarda objetos de otra clase dentro de ella. En lugar de guardar textos o números, guardamos "Artículos".
+
+Para que el código de prueba funcione perfectamente en tu ordenador al copiarlo y pegarlo, he incluido arriba la clase Articulo del Ejercicio 5.1 (solo con lo básico que necesita este ejercicio).
+
+El Código
+Python
+# (La clase del ejercicio 5.1, necesaria para que esto funcione)
+class Articulo:
+    def __init__(self, nombre, precio, stock=0):
+        self.nombre = nombre
+        self.precio = precio
+        self.stock = stock
+
+
+# --- SOLUCIÓN DEL EJERCICIO 5.3 ---
+class Carrito:
+    def __init__(self):
+        # Empezamos con una lista vacía para guardar las líneas de compra
+        self.lineas = []
+
+    def agregar(self, articulo, cantidad):
+        # Guardamos los datos como una tupla (objeto, número)
+        self.lineas.append((articulo, cantidad))
+
+    def total(self):
+        importe_total = 0
+        for articulo, cantidad in self.lineas:
+            # articulo.precio accede al precio del objeto Articulo
+            importe_total += articulo.precio * cantidad
+        return importe_total
+
+    def resumen(self):
+        for articulo, cantidad in self.lineas:
+            total_linea = articulo.precio * cantidad
+            print(f"{cantidad} x {articulo.nombre} = {total_linea} €")
+        
+        # Al final, llamamos a nuestro propio método total()
+        print(f"TOTAL: {self.total()} €")
+
+
+# --- Código de prueba del enunciado ---
+carrito = Carrito()
+# Fíjate que se crea el Articulo al mismo tiempo que se le pasa al Carrito
+carrito.agregar(Articulo("Balón de fútbol", 25.0, 10), 3)
+carrito.agregar(Articulo("Cinta de pádel", 9.5, 20), 2)
+carrito.agregar(Articulo("Botella deportiva", 15.0, 5), 1)
+
+carrito.resumen()
+Explicación en detalle
+1. La Lista de Tuplas (articulo, cantidad)
+El constructor del carrito solo necesita una lista vacía: self.lineas = [].
+Cuando el método agregar recibe un artículo y una cantidad, los junta entre paréntesis (articulo, cantidad). Esto crea una tupla (una parejita inseparable) y la mete en la lista con .append().
+
+2. Desempaquetar en el bucle for
+En los métodos total y resumen, recorremos esa lista de tuplas. En lugar de escribir for linea in self.lineas:, hacemos algo mucho más inteligente:
+for articulo, cantidad in self.lineas:
+Esto automáticamente extrae el objeto y el número de la tupla y los guarda en esas dos variables en cada vuelta del bucle. Exactamente igual que hacíamos con .items() en los diccionarios.
+
+3. Acceder a las variables de OTRO objeto (¡La clave de la composición!)
+Aquí está el núcleo del ejercicio. Como la variable articulo no es un texto, sino un objeto de la clase Articulo, podemos acceder a sus atributos usando el punto.
+
+Si quiero su nombre: articulo.nombre
+
+Si quiero su precio: articulo.precio
+Por eso multiplicamos articulo.precio * cantidad para saber cuánto cuesta esa línea.
+
+4. Llamar a tus propios métodos con self.
+En el método resumen(), el enunciado nos pide pintar el total al final. Como ya tenemos un método que calcula el total (se llama total()), no repetimos el código matemático. Simplemente llamamos a self.total() dentro de la f-string del último print.
+
+🚨 Tu plantilla para el examen (Composición de Clases)
+Si el examen te pide un "Contenedor" de cosas (una Agencia que guarda Reservas, una Factura que guarda Productos, un Hospital que guarda Pacientes), usa esta estructura:
+
+Python
+class Contenedor:
+    def __init__(self):
+        # 1. Lista vacía para guardar los objetos
+        self.elementos = []
+
+    def agregar(self, objeto, dato_extra):
+        # 2. Añadir a la lista (como tupla si hay datos extra)
+        self.elementos.append((objeto, dato_extra))
+
+    def calcular_total(self):
+        # 3. Recorrer la lista y sumar accediendo a los atributos del objeto
+        suma = 0
+        for objeto, dato_extra in self.elementos:
+            suma += objeto.precio * dato_extra
+        return suma
+
+    def mostrar_resumen(self):
+        # 4. Recorrer la lista para imprimir propiedades del objeto
+        for objeto, dato_extra in self.elementos:
+            print(f"{dato_extra} - {objeto.nombre}")
+        print(f"Total: {self.calcular_total()}")
+Pásame el Ejercicio 5.4 cuando lo tengas copiado. ¡Ese remata la sección combinando objetos con las comprehensions que vimos al principio!
+
+Ejercicio 5.4 · Lista de objetos
+
+Con la clase Articulo del ejercicio 5.1 y esta lista:
+
+catalogo = [
+
+Articulo("Esterilla", 30.0, 12),
+
+Articulo("Comba", 12.0, 0),
+
+Articulo("Bicicleta estática", 180.0, 3),
+
+Articulo("Mancuernas", 45.0, 0),
+
+]
+
+Resuelve cada apartado en una sola línea, usando comprehensions o sorted():
+
+Los nombres de los artículos sin stock.
+Un diccionario nombre → valor_inventario().
+El catálogo ordenado por precio de menor a mayor. Muestra cada artículo con print().
+Salida esperada
+
+['Comba', 'Mancuernas']
+
+{'Esterilla': 360.0, 'Comba': 0.0, 'Bicicleta estática': 540.0, 'Mancuernas': 0.0}
+
+Comba | 12.0 € | 0 uds.
+
+Esterilla | 30.0 € | 12 uds.
+
+Mancuernas | 45.0 € | 0 uds.
+
+Bicicleta estática | 180.0 € | 3 uds.
+
+Este ejercicio es una joya porque une todo lo que has aprendido en la Sección 2 (comprehensions) con lo de la Sección 5 (objetos). Es muy habitual en los exámenes pedirte que filtres o busques información dentro de una lista que, en lugar de textos, contiene objetos.
+
+Para que puedas ejecutarlo, te pongo la clase Articulo reducida con lo justo que necesita este ejercicio.
+
+El Código
+Python
+class Articulo:
+    def __init__(self, nombre, precio, stock=0):
+        self.nombre = nombre
+        self.precio = precio
+        self.stock = stock
+
+    def valor_inventario(self):
+        return self.precio * self.stock
+
+    def __str__(self):
+        return f"{self.nombre} | {self.precio} € | {self.stock} uds."
+
+# --- Lista del enunciado ---
+catalogo = [
+    Articulo("Esterilla", 30.0, 12),
+    Articulo("Comba", 12.0, 0),
+    Articulo("Bicicleta estática", 180.0, 3),
+    Articulo("Mancuernas", 45.0, 0),
+]
+
+# --- SOLUCIÓN DEL EJERCICIO 5.4 ---
+
+# 1. Los nombres de los artículos sin stock (List Comprehension)
+sin_stock = [art.nombre for art in catalogo if art.stock == 0]
+print(sin_stock)
+
+# 2. Diccionario nombre -> valor_inventario() (Dictionary Comprehension)
+valor_total = {art.nombre: art.valor_inventario() for art in catalogo}
+print(valor_total)
+
+# 3. Ordenar por precio y mostrar.
+# (Se puede hacer en una sola línea combinando un bucle rápido y sorted)
+[print(art) for art in sorted(catalogo, key=lambda art: art.precio)]
+Explicación en detalle
+Lo más importante que debes entender aquí es que la variable temporal del bucle (yo la he llamado art) es el objeto completo.
+Por lo tanto, no puedes guardar art sin más, porque guardarías un código raro de memoria. Tienes que acceder a sus piezas usando el punto: art.nombre, art.stock, etc.
+
+1. List Comprehension filtrando objetos
+La fórmula es la misma de siempre, pero accediendo a atributos:
+
+Qué quiero guardar: art.nombre (el nombre del objeto).
+
+Condición: if art.stock == 0 (el stock del objeto es cero).
+
+2. Dictionary Comprehension ejecutando métodos
+En los diccionarios, la clave y el valor se separan por :
+
+Clave: art.nombre
+
+Valor: Fíjate que aquí no accedemos a una variable, sino que ejecutamos un método poniendo paréntesis al final: art.valor_inventario(). El diccionario guardará el número que devuelva ese cálculo.
+
+3. Ordenar objetos con sorted() y lambda
+Aquí hay un truco de nivel avanzado que sirve de puente perfecto para la Sección 3 (Programación funcional).
+Si le pasas a sorted() una lista de números [3, 1, 2], sabe ordenarlos. Pero si le pasas objetos Articulo, Python te dirá: "Oye, ¿por qué los ordeno? ¿Por orden alfabético del nombre? ¿Por stock? ¿Por precio?".
+Para decírselo, usamos key=lambda variable: variable.atributo_por_el_que_ordenar.
+
+lambda art: art.precio significa: "Para ordenar cada objeto (art), fíjate únicamente en su precio".
+
+El [print(art) for art in ...] es un truco para hacer un bucle for que imprima todo en una sola línea, cumpliendo la restricción del enunciado.
+
+🚨 Tu plantilla para el examen (Listas de Objetos)
+Plantilla A: Extraer datos de objetos en una lista
+
+Python
+[objeto.atributo_deseado for objeto in LISTA_OBJETOS if objeto.atributo_condicion == VALOR]
+Plantilla B: Ordenar una lista de objetos
+
+Python
+# Ordenar de menor a mayor (por defecto)
+lista_ordenada = sorted(LISTA_OBJETOS, key=lambda x: x.atributo_para_ordenar)
+
+# Ordenar de mayor a menor (añadiendo reverse=True)
+lista_ordenada_reves = sorted(LISTA_OBJETOS, key=lambda x: x.atributo, reverse=True)
+Con esto hemos barrido las bases de las Clases y las Comprehensions. Ya deberías sentirte mucho más seguro leyendo esta sintaxis.
+
+Dime, ¿qué prefieres hacer ahora? Podemos atacar la Sección 3 (Programación funcional) para dominar del todo las lambda que acaban de aparecer, o saltar a la Sección 6 (Sobrecarga de operadores) si quieres ver cómo hacer que se puedan sumar objetos con el símbolo +.
+
+Sección 3. Programación funcional
+
+Una empresa de taxis registra los trayectos del día. Trabaja con estos datos en todos los ejercicios de la sección:
+
+carreras = [
+
+{"id": 1, "pasajero": "Raúl", "km": 12.0, "importe": 18.5, "tarjeta": True},
+
+{"id": 2, "pasajero": "Sofía", "km": 3.5, "importe": 7.0, "tarjeta": False},
+
+{"id": 3, "pasajero": "Iván", "km": 28.0, "importe": 42.0, "tarjeta": True},
+
+{"id": 4, "pasajero": "Claudia", "km": 8.0, "importe": 13.5, "tarjeta": True},
+
+{"id": 5, "pasajero": "Hugo", "km": 15.0, "importe": 24.0, "tarjeta": False},
+
+]
+
+El campo tarjeta indica si el pasajero pagó con tarjeta (True) o en efectivo (False).
+
+Ejercicio 3.1 · Funciones lambda
+
+Crea una función lambda llamada con_suplemento que reciba un importe y le sume 2.50 € de suplemento nocturno.
+Crea una función lambda llamada es_larga que reciba unos kilómetros y devuelva True si son 10 o más.
+Usa sorted() con una lambda para ordenar las carreras de más a menos kilómetros y muestra solo el nombre del pasajero.
+Salida esperada
+
+21.0
+
+False
+
+['Iván', 'Hugo', 'Raúl', 'Claudia', 'Sofía']
+
+La programación funcional en Python puede parecer rara al principio por su sintaxis compacta, pero es 100 % mecánica. Si dominas los bloques básicos, el resto es rellenar huecos.
+
+¿Qué es una función lambda?
+Es una función rápida y anónima de una sola línea. En lugar de escribir el bloque clásico de 3 líneas (def ...: return ...), lo comprimes así:
+
+Python
+nombre_funcion = lambda entrada : lo_que_devuelve
+(Ojo: nunca llevan la palabra return, devuelven el resultado automáticamente).
+
+El Código (Ejercicio 3.1)
+Python
+carreras = [
+    {"id": 1, "pasajero": "Raúl",    "km": 12.0, "importe": 18.5, "tarjeta": True},
+    {"id": 2, "pasajero": "Sofía",   "km": 3.5,  "importe": 7.0,  "tarjeta": False},
+    {"id": 3, "pasajero": "Iván",    "km": 28.0, "importe": 42.0, "tarjeta": True},
+    {"id": 4, "pasajero": "Claudia", "km": 8.0,  "importe": 13.5, "tarjeta": True},
+    {"id": 5, "pasajero": "Hugo",    "km": 15.0, "importe": 24.0, "tarjeta": False},
+]
+
+# 1. Lambda que suma 2.50 a un importe
+con_suplemento = lambda importe: importe + 2.50
+
+# 2. Lambda que devuelve True si km >= 10
+es_larga = lambda km: km >= 10
+
+# 3. Ordenar diccionarios de más a menos km y extraer solo el nombre
+ordenadas = sorted(carreras, key=lambda c: c["km"], reverse=True)
+pasajeros = [c["pasajero"] for c in ordenadas]
+
+# --- Código de prueba ---
+print(con_suplemento(18.5))
+print(es_larga(3.5))
+print(pasajeros)
+Explicación en detalle
+Matemáticas en lambda (con_suplemento):
+
+lambda importe: importe + 2.50 recibe un número (importe) y devuelve ese número más 2.50. Luego la llamas exactamente igual que una función normal: con_suplemento(18.5).
+
+Condiciones en lambda (es_larga):
+
+lambda km: km >= 10 evalúa la comparación. En Python, cualquier comparación (>, <, ==, >=) devuelve automáticamente True o False, por lo que no necesitas escribir un if.
+
+Ordenar una lista de diccionarios (sorted):
+
+En el ejercicio 5.4 ordenábamos objetos usando el punto (art.precio). Aquí carreras es una lista de diccionarios, así que accedemos al dato usando corchetes: c["km"].
+
+Como el enunciado pide de más a menos (descendente), añadimos reverse=True.
+
+Como sorted() te devuelve la lista entera de diccionarios ordenados, al final pasamos una list comprehension rápida [c["pasajero"] for c in ordenadas] para quedarnos solo con los nombres.
+
+🚨 Tu plantilla para el examen
+Lambda matemática o lógica:
+mi_funcion = lambda x: x + 10  (o x > 5)
+
+Ordenar lista de diccionarios:
+sorted(LISTA_DICCIONARIOS, key=lambda item: item["CLAVE_ORDEN"], reverse=True) (quita reverse=True si piden de menor a mayor).
+
+Cuando quieras seguimos con el Ejercicio 3.2 (map()).
+
+vuelve a explicar este porfa
+
+¡Claro! Vamos a desmenuzar las funciones lambda.
+
+Entender esto te va a ahorrar mucho sufrimiento en esta sección, porque map(), filter() y reduce() (que vienen en los siguientes ejercicios) se alimentan casi exclusivamente de lambdas.
+
+1. La sintaxis del "atajo" (El apartado 1 y 2)
+Piensa en una función normal. Si yo te pido "crea una función que reciba un importe y le sume 2.50", tú harías esto:
+
+Python
+# Función tradicional
+def con_suplemento_normal(importe):
+    resultado = importe + 2.50
+    return resultado
+Las funciones lambda son exactamente eso, pero embutido en una sola línea para no perder tiempo.
+
+Quitas el def y pones lambda.
+
+Quitas los paréntesis de los parámetros y dejas solo el nombre.
+
+Quitas el return (porque asume que lo que pongas a la derecha de los dos puntos es lo que tiene que devolver).
+
+Python
+# La misma función en versión lambda
+con_suplemento = lambda importe: importe + 2.50
+Se lee así: "Oye lambda, vas a recibir una variable que he decidido llamar importe. Cómodo, súmale 2.50 y devuélvemelo."
+
+Lo mismo aplica para el apartado 2 (la condición lógica):
+
+Python
+# Función tradicional
+def es_larga_normal(km):
+    if km >= 10:
+        return True
+    else:
+        return False
+
+# Versión lambda ultrarrápida
+es_larga = lambda km: km >= 10
+Aquí la lambda recibe km, hace la pregunta km >= 10 y escupe automáticamente True o False.
+
+2. El caso de uso real: el apartado 3 (El sorted)
+¿Para qué queremos funciones de una sola línea? Para meterlas dentro de otras cosas, como el sorted().
+
+Cuando a la función sorted(carreras) le metes una lista de diccionarios (como las carreras de taxi del enunciado), Python entra en pánico y dice:
+
+"Vale, te lo ordeno, pero ¿por qué criterio? ¿Por el pasajero? ¿Por los kilómetros? ¿Por si ha pagado con tarjeta?"
+
+Para decírselo, usamos el parámetro key= (clave de ordenación). Y ahí es donde brilla la lambda.
+
+Python
+ordenadas = sorted(carreras, key=lambda c: c["km"], reverse=True)
+Fíjate bien en la parte de la lambda: lambda c: c["km"].
+Se lee así:
+
+"Python, para ordenar esta lista, por cada carrera (a la que llamo c), métete en su diccionario, busca la llave ["km"] y usa ese número para decidir el orden."
+
+Como el enunciado pedía de mayor a menor (de más a menos km), le ponemos el reverse=True.
+
+El remate (la comprehension):
+El sorted() nos devuelve los diccionarios enteros ordenados, pero el enunciado pide que mostremos solo el nombre del pasajero (la salida esperada es ['Iván', 'Hugo', 'Raúl', ...]).
+Por eso, en la línea de debajo, metemos la lista ordenadas en una list comprehension súper rápida para extraer solo el nombre de cada uno:
+
+Python
+pasajeros = [c["pasajero"] for c in ordenadas]
+Dime si ahora ves más claro de dónde salen y para qué sirven. Si es así, saltamos al 3.2 donde las lambdas se juntan con el famoso map().
+
+entonces la plantilla cual seria
+
+Plantilla A: Función rápida matemática o lógica (Lambda)
+Si en el examen te piden "crea una función lambda que reciba X y haga Y":
+
+Python
+nombre_funcion = lambda variable: OPERACIÓN_O_CONDICIÓN
+Lo que cambiarás en el examen:
+
+nombre_funcion: el nombre que te pidan (ej. con_suplemento).
+
+variable: el nombre que le quieras dar al dato que entra (ej. x, importe, km).
+
+OPERACIÓN_O_CONDICIÓN: la matemática (x + 2.50) o la lógica (x >= 10).
+
+Plantilla B: Ordenar una lista de diccionarios
+Si te dan una lista de diccionarios (como las carreras o clientes) y te piden ordenarlos por un campo concreto:
+
+Python
+lista_ordenada = sorted(LISTA_ORIGINAL, key=lambda item: item["CLAVE_PARA_ORDENAR"], reverse=True)
+Lo que cambiarás en el examen:
+
+LISTA_ORIGINAL: el nombre de la lista (ej. carreras).
+
+item: puedes llamarlo como quieras (ej. c, x, cliente), solo asegúrate de usar la misma letra después de los dos puntos.
+
+"CLAVE_PARA_ORDENAR": el nombre del campo por el que ordenas (ej. "km", "importe", "edad").
+
+reverse=True: úsalo solo si te piden orden de MAYOR a MENOR (descendente). Si piden de menor a mayor, bórralo.
+
+Plantilla C: Extraer un solo dato de una lista de diccionarios
+Si después de ordenar te dicen "muestra solo el nombre del pasajero" o "muestra solo el id":
+
+Python
+resultados = [item["CLAVE_A_MOSTRAR"] for item in lista_ordenada]
+Lo que cambiarás en el examen:
+
+"CLAVE_A_MOSTRAR": el campo que el profesor quiere que se imprima (ej. "pasajero", "id").
+
+Pásame el Ejercicio 3.2 (map()) cuando lo tengas claro y aplicamos esto al siguiente nivel.
+
+Ejercicio 3.2 · map()
+
+Usa map() con una lambda para obtener:
+
+La lista de kilómetros de todas las carreras.
+Una lista de textos con el formato "Carrera 1: 18.5 €".
+Salida esperada
+
+[12.0, 3.5, 28.0, 8.0, 15.0]
+
+['Carrera 1: 18.5 €', 'Carrera 2: 7.0 €', 'Carrera 3: 42.0 €', 'Carrera 4: 13.5 €', 'Carrera 5: 24.0 €']
+
+La función map() es una de las herramientas más importantes de la programación funcional. Su trabajo es transformar todos los elementos de una lista, uno por uno, y devolverte una lista nueva con los resultados.
+
+Para usar map(), siempre le tienes que dar dos cosas:
+
+Una función (normalmente una lambda) que explique cómo transformar un elemento.
+
+La lista original que quieres transformar.
+
+El Código
+Python
+carreras = [
+    {"id": 1, "pasajero": "Raúl",    "km": 12.0, "importe": 18.5, "tarjeta": True},
+    {"id": 2, "pasajero": "Sofía",   "km": 3.5,  "importe": 7.0,  "tarjeta": False},
+    {"id": 3, "pasajero": "Iván",    "km": 28.0, "importe": 42.0, "tarjeta": True},
+    {"id": 4, "pasajero": "Claudia", "km": 8.0,  "importe": 13.5, "tarjeta": True},
+    {"id": 5, "pasajero": "Hugo",    "km": 15.0, "importe": 24.0, "tarjeta": False},
+]
+
+# 1. Obtener la lista de kilómetros
+kilometros = list(map(lambda c: c["km"], carreras))
+
+# 2. Crear textos con formato
+textos = list(map(lambda c: f"Carrera {c['id']}: {c['importe']} €", carreras))
+
+# --- Mostrar resultados ---
+print(kilometros)
+print(textos)
+Explicación en detalle
+1. Extraer un dato específico (c["km"])
+
+lambda c: c["km"]: Nuestra función rápida dice "de cada diccionario c, devuélveme solo el valor de la clave 'km'".
+
+map(..., carreras): Le dice a Python que aplique esa lambda a cada uno de los elementos de la lista carreras.
+
+¡El gran secreto de map! El list(...): En Python 3, la función map() es un poco vaga. En lugar de darte la lista ya calculada, te devuelve un "objeto generador" (si haces print sin el list(), verás algo feo como <map object at 0x00...>). Para obligar a Python a calcular todos los elementos y dártelos entre corchetes [ ], siempre tienes que envolver el map dentro de un list().
+
+2. Formatear texto avanzado
+
+lambda c: f"Carrera {c['id']}: {c['importe']} €": Aquí usamos una f-string dentro de la lambda. De cada diccionario extraemos el 'id' y el 'importe', y lo montamos en una frase bonita. De nuevo, el list() por fuera hace que nos devuelva la lista completa de frases.
+
+Nota de examen: Date cuenta de que en las f-strings, como ya estamos usando comillas dobles " " por fuera de la frase, para sacar las variables del diccionario tenemos que usar comillas simples por dentro (c['id'] en lugar de c["id"]). Si usaras dobles dentro y fuera, Python se haría un lío y daría error.
+
+🚨 Tu plantilla para el examen (map)
+Si en el examen te piden que transformes todos los elementos de una lista en otra cosa (extraer un campo, hacer un cálculo matemático, o montar una frase) usando map():
+
+Python
+resultado = list(map(lambda variable: TRANSFORMACIÓN, LISTA_ORIGINAL))
+Lo que cambiarás en el examen:
+
+variable: el nombre temporal (ej. x, c, cliente).
+
+TRANSFORMACIÓN: lo que quieres extraer o calcular (ej. x["km"], x["importe"] * 1.21, o f"Frase {x['nombre']}").
+
+LISTA_ORIGINAL: la lista de datos que te da el enunciado (ej. carreras, pedidos).
+
+¡Pásame el Ejercicio 3.3 (filter()) y verás que es exactamente el mismo patrón pero para borrar cosas!
+
+Ejercicio 3.3 · filter()
+
+Usa filter() con una lambda para obtener:
+
+Las carreras pagadas en efectivo. Muestra solo el nombre del pasajero.
+Las carreras pagadas con tarjeta y de 10 km o más. Muestra solo su id.
+Salida esperada
+
+['Sofía', 'Hugo']
+
+[1, 3]
+
+La función filter() es la prima hermana de map().
+Mientras que map() transforma todos los elementos (si entran 5, salen 5 modificados), filter() elimina los elementos que no cumplen una condición (si entran 5, pueden salir 2).
+
+Para usar filter(), le das:
+
+Una lambda que devuelva True o False (la condición para sobrevivir).
+
+La lista original.
+
+El Código
+Python
+carreras = [
+    {"id": 1, "pasajero": "Raúl",    "km": 12.0, "importe": 18.5, "tarjeta": True},
+    {"id": 2, "pasajero": "Sofía",   "km": 3.5,  "importe": 7.0,  "tarjeta": False},
+    {"id": 3, "pasajero": "Iván",    "km": 28.0, "importe": 42.0, "tarjeta": True},
+    {"id": 4, "pasajero": "Claudia", "km": 8.0,  "importe": 13.5, "tarjeta": True},
+    {"id": 5, "pasajero": "Hugo",    "km": 15.0, "importe": 24.0, "tarjeta": False},
+]
+
+# 1. Filtrar pagadas en efectivo (tarjeta == False) y mostrar pasajero
+en_efectivo = list(filter(lambda c: c["tarjeta"] == False, carreras))
+pasajeros_efectivo = [c["pasajero"] for c in en_efectivo]
+
+# 2. Filtrar tarjeta y km >= 10, y mostrar id
+largas_tarjeta = list(filter(lambda c: c["tarjeta"] == True and c["km"] >= 10, carreras))
+ids_largas = [c["id"] for c in largas_tarjeta]
+
+# --- Mostrar resultados ---
+print(pasajeros_efectivo)
+print(ids_largas)
+Explicación en detalle
+1. Filtrado simple (Efectivo)
+
+lambda c: c["tarjeta"] == False: Esta es la pregunta. "Oye c, ¿tu atributo tarjeta es Falso?". Si dice que sí, el diccionario sobrevive. Si dice que no, el filter() lo elimina.
+
+Igual que con el map(), hay que envolver el filter() en un list() para que haga el cálculo y nos devuelva la lista de verdad.
+
+El filter devuelve los diccionarios completos. Como el enunciado pide "muestra solo el nombre", hacemos una comprehension rápida en la línea siguiente: [c["pasajero"] for c in en_efectivo].
+
+2. Filtrado con doble condición (Tarjeta Y Largas)
+
+lambda c: c["tarjeta"] == True and c["km"] >= 10: Puedes unir tantas condiciones como quieras usando and (se tienen que cumplir todas) o or (basta con que se cumpla una). En este caso, solo sobreviven si ambas cosas son ciertas.
+
+Después, sacamos solo los IDs con otra comprehension: [c["id"] for c in largas_tarjeta].
+
+Nota de examen para subir nota: En Python, poner c["tarjeta"] == True es redundante porque la variable ya es True o False. Se considera más "pro" escribir simplemente lambda c: c["tarjeta"] and c["km"] >= 10. De la misma forma, para el falso, se puede poner lambda c: not c["tarjeta"]. Pero si te lía, usa el == True o == False que funciona perfectamente.
+
+🚨 Tu plantilla para el examen (filter)
+Si en el examen te piden que te quedes solo con ciertos elementos de una lista usando filter():
+
+Python
+# 1. Aplicar el filtro para quedarse con los diccionarios que cumplen la condición
+diccionarios_filtrados = list(filter(lambda variable: CONDICION, LISTA_ORIGINAL))
+
+# 2. (Si lo piden) Extraer el campo específico para mostrar
+resultado_final = [item["CAMPO_A_MOSTRAR"] for item in diccionarios_filtrados]
+Lo que cambiarás en el examen:
+
+CONDICION: lo que tiene que cumplir (ej. x["km"] > 10, x["estado"] == "Pagado").
+
+CAMPO_A_MOSTRAR: lo que te pidan imprimir (ej. "id", "nombre").
+
+¡Pásame el Ejercicio 3.4 (reduce()) y cerramos la trinidad de la programación funcional!
+
+Ejercicio 3.4 · reduce()
+
+Importa reduce desde el módulo functools y úsalo para calcular:
+
+La recaudación total del día.
+La carrera más larga. Muestra el nombre del pasajero.
+Los kilómetros recorridos en carreras pagadas con tarjeta. Combina filter() y reduce().
+Salida esperada
+
+Recaudación total: 105.0 €
+
+Carrera más larga: Iván
+
+Km pagados con tarjeta: 48.0
+
+Llegamos al final de la trinidad. Mientras que map transforma y filter elimina, la función reduce aplasta toda una lista hasta convertirla en un solo valor (por ejemplo, una suma total, o el número más grande).
+
+Para usar reduce(), primero hay que importarlo. Y la lambda que le pasamos siempre tiene dos variables de entrada: el "acumulador" (el resultado que se va guardando) y el "siguiente elemento" de la lista.
+
+El Código
+Python
+from functools import reduce
+
+carreras = [
+    {"id": 1, "pasajero": "Raúl",    "km": 12.0, "importe": 18.5, "tarjeta": True},
+    {"id": 2, "pasajero": "Sofía",   "km": 3.5,  "importe": 7.0,  "tarjeta": False},
+    {"id": 3, "pasajero": "Iván",    "km": 28.0, "importe": 42.0, "tarjeta": True},
+    {"id": 4, "pasajero": "Claudia", "km": 8.0,  "importe": 13.5, "tarjeta": True},
+    {"id": 5, "pasajero": "Hugo",    "km": 15.0, "importe": 24.0, "tarjeta": False},
+]
+
+# 1. Sumar importes (recaudación total)
+# En este caso, 'acum' y 'c' no son números, sino diccionarios completos.
+# Por eso pasamos primero un map() para sacar solo la lista de números.
+importes = list(map(lambda c: c["importe"], carreras))
+total = reduce(lambda acum, num: acum + num, importes)
+
+# 2. Carrera más larga (comparar diccionarios)
+# Compara el acumulador (la carrera más larga hasta el momento) con la siguiente.
+larga = reduce(lambda acum, c: acum if acum["km"] > c["km"] else c, carreras)
+pasajero_mas_larga = larga["pasajero"]
+
+# 3. Sumar km de carreras pagadas con tarjeta
+# A) Filtramos primero
+tarjetas = list(filter(lambda c: c["tarjeta"], carreras))
+# B) Sacamos solo los kilómetros
+kms_tarjeta = list(map(lambda c: c["km"], tarjetas))
+# C) Sumamos con reduce
+total_kms_tarjeta = reduce(lambda acum, num: acum + num, kms_tarjeta)
+
+# --- Mostrar resultados ---
+print(f"Recaudación total: {total} €")
+print(f"Carrera más larga: {pasajero_mas_larga}")
+print(f"Km pagados con tarjeta: {total_kms_tarjeta}")
+Explicación en detalle
+1. Sumas totales (reduce con map)
+La forma más fácil de sumar un campo específico (como el "importe") en una lista de diccionarios no es hacer la suma directamente en los diccionarios, porque reduce se lía.
+Lo más seguro para el examen es:
+
+Paso A: Extraer todos los números que vas a sumar usando map (te queda [18.5, 7.0, 42.0...]).
+
+Paso B: Hacer el reduce matemático: lambda acum, num: acum + num. Esto le dice: "coge lo que llevas sumado (acum) y súmale el siguiente número (num)".
+
+2. Encontrar el "más grande" (reduce comparando)
+Para encontrar la carrera con más kilómetros:
+
+lambda acum, c: Aquí acum es "la carrera ganadora hasta ahora" y c es "el rival".
+
+acum if acum["km"] > c["km"] else c: Se lee como "quédate con acum si sus kilómetros son mayores que los del rival, si no, quédate con el rival (c)".
+
+Al terminar, te devuelve el diccionario ganador completo. El enunciado te pide solo el nombre, así que en la línea siguiente sacamos larga["pasajero"].
+
+3. El gran combo: filter + map + reduce
+Este es el clásico ejercicio integrador:
+
+Filtramos las carreras pagadas con tarjeta.
+
+Extraemos los números de los kilómetros de esas carreras con map.
+
+Sumamos todos esos kilómetros con reduce.
+
+🚨 Tu plantilla para el examen (reduce)
+Plantilla A: Sumar el total de un campo numérico
+(Primero extraes los números con map, luego los sumas)
+
+Python
+lista_de_numeros = list(map(lambda x: x["CAMPO_A_SUMAR"], LISTA_DICCIONARIOS))
+suma_total = reduce(lambda a, b: a + b, lista_de_numeros)
+Plantilla B: Encontrar el diccionario con el valor "más grande"
+
+Python
+diccionario_ganador = reduce(lambda ganador, rival: ganador if ganador["CAMPO"] > rival["CAMPO"] else rival, LISTA_DICCIONARIOS)
+(Si te piden el más pequeño, cambia el > por <).
+
+Pásame el Ejercicio 3.5. ¡Ese tiene una función que recibe a otra función por dentro!
+
+Ejercicio 3.5 · Funciones que reciben funciones
+
+Escribe una función transformar_importes(carreras, operacion) que reciba la lista de carreras y una función, y devuelva una lista con el resultado de aplicar esa función al importe de cada carrera. No uses map(): resuélvelo con una list comprehension.
+
+Pruébala con:
+
+una función normal a_dolares(x), que convierta euros a dólares con un cambio de 1.08 y redondee a 2 decimales;
+una lambda que añada un 10 % de propina, también redondeada a 2 decimales.
+Salida esperada
+
+[19.98, 7.56, 45.36, 14.58, 25.92]
+
+[20.35, 7.7, 46.2, 14.85, 26.4]
+
+Este ejercicio asusta por el nombre ("Funciones que reciben funciones"), pero en realidad es un concepto muy sencillo: en Python, una función puede pasarse como si fuera una variable más.
+
+Aquí vamos a construir nuestra propia versión casera del map() usando las comprehensions que aprendimos en la Sección 2.
+
+El Código
+Python
+carreras = [
+    {"id": 1, "pasajero": "Raúl",    "km": 12.0, "importe": 18.5, "tarjeta": True},
+    {"id": 2, "pasajero": "Sofía",   "km": 3.5,  "importe": 7.0,  "tarjeta": False},
+    {"id": 3, "pasajero": "Iván",    "km": 28.0, "importe": 42.0, "tarjeta": True},
+    {"id": 4, "pasajero": "Claudia", "km": 8.0,  "importe": 13.5, "tarjeta": True},
+    {"id": 5, "pasajero": "Hugo",    "km": 15.0, "importe": 24.0, "tarjeta": False},
+]
+
+# 1. Función que recibe la lista y OTRA función ("operacion")
+def transformar_importes(carreras, operacion):
+    # Aplicamos la función 'operacion' a cada importe usando una List Comprehension
+    return [operacion(c["importe"]) for c in carreras]
+
+# 2. Función normal que convierte a dólares
+def a_dolares(x):
+    return round(x * 1.08, 2)
+
+# --- Código de prueba ---
+# Prueba A: pasamos la función normal 'a_dolares'
+resultado_dolares = transformar_importes(carreras, a_dolares)
+print(resultado_dolares)
+
+# Prueba B: pasamos una lambda directamente en la llamada para añadir 10%
+resultado_propina = transformar_importes(carreras, lambda x: round(x * 1.10, 2))
+print(resultado_propina)
+Explicación en detalle
+1. El núcleo de la magia: operacion(c["importe"])
+Mira la definición: def transformar_importes(carreras, operacion):.
+La variable operacion no es un número ni un texto, espera recibir el nombre de una función.
+Dentro de la comprehension, hacemos operacion(c["importe"]). Python cogerá el importe (por ejemplo 18.5) y se lo "tragará" la función que le hayamos pasado desde fuera para transformarlo.
+
+2. Pasar funciones sin paréntesis
+¡Este es el error número uno en los exámenes!
+Cuando llamamos a la función en la prueba A hacemos esto:
+transformar_importes(carreras, a_dolares)
+Fíjate que NO ponemos a_dolares(). Si le pones paréntesis, Python la ejecuta en ese momento y daría error porque no le estás pasando la x. Al pasarla sin paréntesis, le estamos entregando la herramienta (la función en sí) para que la use luego por dentro.
+
+3. Lambdas al vuelo (Prueba B)
+En el segundo print, en lugar de crear una función con def, le enchufamos una lambda directamente en los parámetros. Se lee: "Oye transformar_importes, toma esta lista de carreras, y como operación te paso esta pequeña lambda que multiplica por 1.10".
+
+🚨 Tu plantilla para el examen (Pasar funciones)
+Si el enunciado te dice: "Crea una función X que reciba una lista de diccionarios y una función, y devuelva la lista modificada usando comprehensions":
+
+Python
+def mi_funcion_transformadora(lista_diccionarios, funcion_externa):
+    return [funcion_externa(item["CLAVE"]) for item in lista_diccionarios]
+
+# Para probarla con una función normal:
+# mi_funcion_transformadora(datos, nombre_de_tu_funcion) -> ¡SIN PARÉNTESIS!
+
+# Para probarla con lambda:
+# mi_funcion_transformadora(datos, lambda x: calculo_matematico)
+Pásame el Ejercicio 3.6. Es el último de esta sección y trata de lo contrario: ¡funciones que escupen (devuelven) funciones!
+
+Ejercicio 3.6 · Funciones que devuelven funciones
+
+La empresa cobra un precio por kilómetro distinto según la franja horaria. Escribe una función crear_tarifa(precio_km) que devuelva otra función. Esa función recibirá unos kilómetros y devolverá el precio del trayecto, redondeado a 2 decimales.
+
+tarifa_diurna = crear_tarifa(1.10)
+
+tarifa_nocturna = crear_tarifa(1.35)
+
+
+
+print(tarifa_diurna(10))
+
+print(tarifa_nocturna(10))
+
+print([tarifa_nocturna(c["km"]) for c in carreras])
+
+Salida esperada
+
+11.0
+
+13.5
+
+[16.2, 4.73, 37.8, 10.8, 20.25]
+
+Este ejercicio, aunque suena complicado ("funciones que devuelven funciones"), es solo una plantilla muy rígida que en programación se conoce como Closure (Cierre). Sirve para "fabricar" funciones a medida.
+
+El Código
+Python
+carreras = [
+    {"id": 1, "pasajero": "Raúl",    "km": 12.0, "importe": 18.5, "tarjeta": True},
+    {"id": 2, "pasajero": "Sofía",   "km": 3.5,  "importe": 7.0,  "tarjeta": False},
+    {"id": 3, "pasajero": "Iván",    "km": 28.0, "importe": 42.0, "tarjeta": True},
+    {"id": 4, "pasajero": "Claudia", "km": 8.0,  "importe": 13.5, "tarjeta": True},
+    {"id": 5, "pasajero": "Hugo",    "km": 15.0, "importe": 24.0, "tarjeta": False},
+]
+
+# 1. La fábrica de funciones
+def crear_tarifa(precio_km):
+    
+    # 2. La función que se va a fabricar (la interna)
+    def calcular_trayecto(km):
+        # Usa el parámetro interno (km) y el parámetro de fuera (precio_km)
+        return round(km * precio_km, 2)
+        
+    # 3. Devolvemos la función fabricada (¡SIN PARÉNTESIS!)
+    return calcular_trayecto
+
+# --- Código de prueba del enunciado ---
+
+# Fabricamos las dos tarifas
+tarifa_diurna = crear_tarifa(1.10)
+tarifa_nocturna = crear_tarifa(1.35)
+
+# Las usamos como si fueran funciones normales
+print(tarifa_diurna(10))
+print(tarifa_nocturna(10))
+print([tarifa_nocturna(c["km"]) for c in carreras])
+Explicación en detalle
+1. La función exterior (crear_tarifa) actúa como "fábrica"
+Recibe un dato (precio_km) y su único trabajo es configurar la función interna y escupirla al exterior.
+
+2. La función interior (calcular_trayecto) es el producto
+El verdadero trabajo se hace aquí dentro. Lo mágico de los closures en Python es que la función de dentro recuerda el dato de fuera. Cuando creas la tarifa diurna, la función de dentro se queda "tatuado" en su memoria que precio_km es 1.10 para siempre.
+
+3. El return sin paréntesis
+Igual que en el ejercicio anterior, al final de la fábrica ponemos return calcular_trayecto. Si pusieras paréntesis, se intentaría ejecutar antes de salir. Sin paréntesis, estás diciendo: "Toma, aquí tienes la función ya montada. Úsala cuando quieras".
+
+4. ¿Cómo se usan? (El código de prueba)
+Al hacer tarifa_diurna = crear_tarifa(1.10), la variable tarifa_diurna se convierte automáticamente en una función. Por eso en la línea siguiente el profesor puede hacer tarifa_diurna(10), pasándole los 10 kilómetros.
+
+🚨 Tu plantilla para el examen (Cierres / Funciones de fábrica)
+Si en el examen te piden una función "que devuelva otra función" o "que fabrique filtros/etiquetas/tarifas", es siempre esta estructura rusa de muñecas (una función dentro de otra):
+
+Python
+def funcion_fabricante(dato_base):
+    
+    # 1. Creas la función interior
+    def funcion_trabajadora(dato_dinamico):
+        return CALCULO_USANDO(dato_base, dato_dinamico)
+        
+    # 2. Devuelves la función interior SIN paréntesis
+    return funcion_trabajadora
+Con esto hemos terminado la Sección 3 (Zona Verde/Amarilla). Tienes el control de todo el bloque funcional (map, filter, reduce y cierres).
+
+A partir de aquí, las Secciones 7, 8 y 9 mezclan clases con herencias. La Sección 4 es la recursión (Zona Roja). ¿Hacia dónde vamos ahora?
+
+Sección 7. Herencia, polimorfismo y herencia múltiple
+
+Ejercicio 7.1 · Peajes de una autopista
+
+Una autopista cobra peajes distintos según el tipo de vehículo.
+
+Crea una superclase Vehiculo con los atributos matricula y kilometros, y un método peaje() que devuelva 0.10 € por kilómetro.
+Crea estas subclases, que sobrescriben peaje():
+Moto: paga la mitad que un vehículo normal;
+Camion: tiene un atributo adicional ejes y paga lo mismo que un vehículo normal más 2 € por cada eje. Usa super() tanto en el constructor como en peaje().
+Crea una lista con un Vehiculo, una Moto y un Camion y recórrela con un único bucle, mostrando la matrícula y el peaje redondeado a 2 decimales.
+Muestra el total recaudado.
+vehiculos = [
+
+Vehiculo("1234-ABC", 100),
+
+Moto("5678-DEF", 100),
+
+Camion("9012-GHI", 100, 4),
+
+]
+
+Salida esperada
+
+1234-ABC → 10.0 €
+
+5678-DEF → 5.0 €
+
+9012-GHI → 18.0 €
+
+Total recaudado: 33.0 €
+
+Pregunta: ¿en qué parte de tu código se aplica el polimorfismo?
+
+Entramos en la Sección 7, el terreno de la Herencia. Aquí el objetivo es no repetir código. Si ya tienes una clase general (como Vehículo), las clases específicas (Moto, Camión) la "heredan" y solo cambian lo que necesitan.
+
+El Código
+Python
+# 1. Superclase (La clase padre)
+class Vehiculo:
+    def __init__(self, matricula, kilometros):
+        self.matricula = matricula
+        self.kilometros = kilometros
+
+    def peaje(self):
+        return self.kilometros * 0.10
+
+# 2. Subclase Moto (Hereda de Vehiculo)
+class Moto(Vehiculo):
+    # Como no necesita atributos nuevos, no hace falta poner __init__
+    def peaje(self):
+        return super().peaje() / 2
+
+# 3. Subclase Camion (Hereda de Vehiculo)
+class Camion(Vehiculo):
+    def __init__(self, matricula, kilometros, ejes):
+        # super() llama al constructor del padre para no repetir código
+        super().__init__(matricula, kilometros) 
+        self.ejes = ejes
+
+    def peaje(self):
+        # super() llama al peaje del padre y le suma la parte del camión
+        return super().peaje() + (2 * self.ejes)
+
+# --- Código de prueba ---
+vehiculos = [
+    Vehiculo("1234-ABC", 100),
+    Moto("5678-DEF", 100),
+    Camion("9012-GHI", 100, 4),
+]
+
+# Recorrer la lista y calcular totales
+total = 0
+for v in vehiculos:
+    coste = round(v.peaje(), 2)
+    print(f"{v.matricula} -> {coste} €")
+    total += coste
+
+print(f"Total recaudado: {total} €")
+Explicación en detalle
+1. La Herencia (class Hija(Padre):)
+Para decirle a Python que una Moto es un Vehículo, lo pones entre paréntesis: class Moto(Vehiculo):. Solo con hacer eso, la Moto ya tiene matrícula y kilómetros, sin que tú escribas nada.
+
+2. El poder de super()
+La palabra super() significa "llama a mi padre". El enunciado te pedía usarlo en el Camión de dos formas:
+
+En el constructor (__init__): El camión necesita un atributo extra (ejes). En vez de volver a escribir self.matricula = matricula, hacemos super().__init__(matricula, kilometros). Eso le pasa la pelota a la clase Vehiculo para que lo guarde ella, y luego el camión solo guarda sus ejes.
+
+En el método (peaje): En lugar de repetir la multiplicación de los kilómetros, hacemos super().peaje(), que calcula los 10 euros base, y luego le sumamos 2 * self.ejes.
+
+3. Respuesta a la pregunta del profesor: El Polimorfismo
+
+¿En qué parte se aplica el polimorfismo?
+Se aplica en el bucle for al hacer v.peaje().
+
+Explicación para ti: Polimorfismo significa "muchas formas". En el bucle estamos recorriendo una lista que tiene tres objetos de tipos distintos (un Vehículo, una Moto y un Camión). Sin embargo, a los tres les damos exactamente la misma orden (v.peaje()) y Python es lo bastante listo para saber qué fórmula matemática tiene que aplicar en cada caso, sin necesidad de que nosotros escribamos ningún if tipo == 'Moto': ....
+
+🚨 Tu plantilla para el examen (Herencia y super())
+Si el examen te pide "Crea una clase X que herede de Y, con un atributo nuevo":
+
+Python
+class ClaseHija(ClasePadre):
+    # 1. Constructor con los datos del padre + los datos nuevos
+    def __init__(self, dato_padre1, dato_padre2, dato_nuevo):
+        # 2. Se le pasan al padre sus datos
+        super().__init__(dato_padre1, dato_padre2)
+        # 3. Guardas el tuyo
+        self.dato_nuevo = dato_nuevo
+
+    # 4. Sobrescribir un método usando el cálculo del padre
+    def metodo_calculo(self):
+        resultado_padre = super().metodo_calculo()
+        return resultado_padre + EXTRAS_DE_LA_HIJA
+Pásame el Ejercicio 7.2 cuando estés listo para avanzar en esta sección.
+
+una pregunta importante, si de todos los ejercicios tuvieras que elegir 10 para hacer un examen cuales usarias?
+
+1. Ejercicio 5.4 (Lista de objetos): Es el ejercicio más completo porque fusiona dos mundos. Te obliga a demostrar que sabes iterar con comprehensions, pero en lugar de textos, manejas objetos y accedes a sus atributos con el punto (art.nombre).
+
+2. Ejercicio 3.4 (El combo reduce + map + filter): Si dominas cómo encadenar estas tres funciones para extraer números y luego sumarlos, tienes el bloque de programación funcional completamente asegurado. Es el patrón funcional que más puntos da.
+
+3. Ejercicio 5.3 (Composición - Carrito de la compra): En la vida real y en los exámenes, las clases no están aisladas. Meter objetos (Artículos) dentro de una lista en otra clase (Carrito) y saber extraer su precio multiplicándolo por la cantidad es un clásico absoluto.
+
+4. Ejercicio 7.1 (Herencia y super()): Es la prueba de fuego de la Programación Orientada a Objetos. Demuestra que entiendes cómo reciclar código del padre (super().__init__ y super().metodo()) y cómo funciona el polimorfismo en un bucle for.
+
+5. Ejercicio 2.4 (Dictionary Comprehensions con varios if): Iterar diccionarios usando .items() es una trampa común. Este ejercicio te obliga a dominar el desempaquetado de claves y valores a la vez que aplicas condiciones lógicas anidadas.
+
+6. Ejercicio 3.1 (sorted con lambda): Saber ordenar una lista compleja (ya sean diccionarios u objetos) diciéndole a Python exactamente por qué campo debe ordenar (key=lambda x: x["km"]) es una habilidad de supervivencia obligatoria.
+
+7. Ejercicio 5.2 (Cuentas de banco - Atributos de clase): Los profesores lo ponen siempre para pillar a quien no sabe la diferencia entre una variable del objeto (self.saldo) y una variable global compartida por todos (Cuenta.total_cuentas).
+
+8. Ejercicio 2.5 (Aplanar listas de listas con doble for): La sintaxis del doble bucle en una list comprehension es contraintuitiva al principio. Demuestra un nivel avanzado de lectura de código.
+
+9. Ejercicio 2.2 (If/Else al principio de la list comprehension): Distingue perfectamente a quien sabe la diferencia entre filtrar elementos (el if va al final) y transformar elementos condicionando el resultado (el if/else va al principio).
+
+10. Ejercicio 3.6 (Closures / Funciones que devuelven funciones): Representa el nivel más alto de abstracción en Python. Entender que una función puede fabricar y escupir otra función configurada a medida (como las tarifas) garantiza los últimos puntos del examen.
+
+Con tu estrategia de tener el código al lado durante la prueba, dominar las plantillas estructurales de estos 10 ejercicios específicos te da respuesta directa a más del 80% de lo que te puedan plantear.
+
+Ejercicio 7.2 · Suscripciones de una plataforma de series
+
+Una plataforma de series ofrece varios tipos de suscripción.
+
+Crea una superclase Suscripcion con usuario y cuota_base, y los métodos:
+precio_mensual(), que devuelve la cuota base;
+ficha(), que devuelve "<usuario> (<tipo>): <precio> €". <tipo> es el nombre de la clase y <precio> se muestra con 2 decimales. Pista: type(self).__name__.
+Crea estas subclases:
+Familiar: recibe además perfiles_extra y cuesta la cuota base más 3 € por cada perfil extra;
+Anual: tiene un 15 % de descuento sobre la cuota base;
+ConAnuncios: cuesta el 60 % de la cuota base.
+Recorre la lista de suscripciones mostrando la ficha de cada una y calcula los ingresos mensuales totales con sum() y una comprehension.
+suscripciones = [
+
+Suscripcion("Carlos", 12),
+
+Familiar("Lucía", 12, 2),
+
+Anual("Sergio", 12),
+
+ConAnuncios("Nerea", 12),
+
+]
+
+Salida esperada
+
+Carlos (Suscripcion): 12.00 €
+
+Lucía (Familiar): 18.00 €
+
+Sergio (Anual): 10.20 €
+
+Nerea (ConAnuncios): 7.20 €
+
+Ingresos mensuales: 47.40 €
+
+Este ejercicio es una demostración brillante de por qué la herencia es tan potente. Fíjate en cómo vamos a escribir el método ficha() una sola vez en la clase padre, y va a funcionar mágicamente para todas las clases hijas.
+
+El Código
+Python
+# 1. Superclase (Padre)
+class Suscripcion:
+    def __init__(self, usuario, cuota_base):
+        self.usuario = usuario
+        self.cuota_base = cuota_base
+
+    def precio_mensual(self):
+        return self.cuota_base
+
+    def ficha(self):
+        # type(self).__name__ averigua mágicamente si es Familiar, Anual, etc.
+        tipo = type(self).__name__
+        precio = self.precio_mensual()
+        # :.2f fuerza a que se muestren siempre 2 decimales
+        return f"{self.usuario} ({tipo}): {precio:.2f} €"
+
+# 2. Subclases
+class Familiar(Suscripcion):
+    def __init__(self, usuario, cuota_base, perfiles_extra):
+        super().__init__(usuario, cuota_base)
+        self.perfiles_extra = perfiles_extra
+
+    def precio_mensual(self):
+        return super().precio_mensual() + (3 * self.perfiles_extra)
+
+class Anual(Suscripcion):
+    # Como no hay atributos nuevos, no hace falta __init__
+    def precio_mensual(self):
+        return super().precio_mensual() * 0.85
+
+class ConAnuncios(Suscripcion):
+    def precio_mensual(self):
+        return super().precio_mensual() * 0.60
+
+# --- Código de prueba del enunciado ---
+suscripciones = [
+    Suscripcion("Carlos", 12),
+    Familiar("Lucía", 12, 2),
+    Anual("Sergio", 12),
+    ConAnuncios("Nerea", 12),
+]
+
+# Recorrer mostrando la ficha
+for s in suscripciones:
+    print(s.ficha())
+
+# Calcular el total con sum() y una comprehension
+total = sum([s.precio_mensual() for s in suscripciones])
+print(f"Ingresos mensuales: {total:.2f} €")
+Explicación en detalle
+1. El truco del nombre de la clase: type(self).__name__
+Este es un atajo buenísimo para los exámenes. Cuando llamas al método ficha() desde un objeto Familiar, self es ese objeto.
+
+type(self) te dice que es de la clase <class 'Familiar'>.
+
+.__name__ extrae solo el texto limpio "Familiar".
+Gracias a esto, no tienes que crear un atributo self.tipo_suscripcion para cada clase.
+
+2. Formatear decimales en las f-strings (:.2f)
+El enunciado pide explícitamente "2 decimales" (y en la salida esperada pone 12.00 €).
+Si usas la función round(12, 2), Python imprimirá 12. Para forzar a que pinte los ceros, en la f-string pones dos puntos, un punto y 2f (dos float): {precio:.2f}.
+
+3. El polimorfismo indirecto en .ficha()
+Mira el método ficha(). Llama a self.precio_mensual().
+Si el objeto es Familiar, no llama al precio_mensual() del padre, sino al de la clase Familiar. Es decir, la clase padre está delegando el cálculo en sus hijas, aunque la frase final la monte el padre. ¡Esto ahorra muchísimo código!
+
+4. Sumar con sum() y List Comprehensions
+En el ejercicio 7.1 sumábamos dentro del bucle (total += coste). Aquí el profesor te pide hacerlo "estilo Python".
+
+[s.precio_mensual() for s in suscripciones] crea una lista solo con los números: [12.0, 18.0, 10.2, 7.2].
+
+Al envolver eso con sum(...), Python lo suma todo de golpe.
+
+🚨 Tu plantilla para el examen
+Plantilla A: Averiguar el nombre de la clase
+Si en el examen te piden que el objeto imprima de qué tipo es (por ejemplo: "Soy un Coche", "Soy una Moto"):
+
+Python
+nombre_clase = type(self).__name__
+Plantilla B: Forzar decimales en textos (aunque sean ceros)
+
+Python
+# Imprime siempre con 2 decimales (ej: 15.00)
+f"Texto {variable:.2f} texto"
+Plantilla C: Calcular totales rápidamente (sum + comprehension)
+Si te piden la suma total de una lista de objetos:
+
+Python
+total = sum([objeto.método_matemático() for objeto in LISTA_OBJETOS])
+# o sumando un atributo:
+# total = sum([objeto.precio for objeto in LISTA_OBJETOS])
+Pásame el 7.3 o el que quieras atacar ahora.
+
+Ejercicio 7.3 · Impresora multifunción (herencia múltiple)
+
+Crea una clase EquipoOficina con un atributo modelo y un método encender() que muestre "<modelo>: encendido".
+Crea dos clases que hereden de EquipoOficina:
+Impresora, con un método imprimir(documento) que muestre "Imprimiendo <documento>";
+Escaner, con un método escanear(documento) que muestre "Escaneando <documento>".
+Crea una clase Multifuncion que herede de Impresora y de Escaner, con un método fotocopiar(documento) que reutilice los dos anteriores.
+Además, cada clase debe sobrescribir un método descripcion() que use super(), para que en un objeto Multifuncion se obtenga la descripción completa.
+equipo = Multifuncion("OfiPro 300")
+
+equipo.encender()
+
+equipo.fotocopiar("contrato.pdf")
+
+print(equipo.descripcion())
+
+print([clase.__name__ for clase in Multifuncion.__mro__])
+
+Salida esperada
+
+OfiPro 300: encendido
+
+Escaneando contrato.pdf
+
+Imprimiendo contrato.pdf
+
+Equipo de oficina + Escáner + Impresora + Multifunción
+
+['Multifuncion', 'Impresora', 'Escaner', 'EquipoOficina', 'object']
+
+Pregunta: explica con tus palabras por qué la descripción sale en ese orden. Relaciónalo con el MRO que se muestra en la última línea.
+
+Este es el ejercicio "jefe final" de la Sección 7. La herencia múltiple (cuando una clase tiene dos padres a la vez) es una de las cosas más potentes de Python, pero también de las más liosas si no entiendes cómo decide Python a quién llamar primero.
+
+El Código
+Python
+# 1. Superclase Base
+class EquipoOficina:
+    def __init__(self, modelo):
+        self.modelo = modelo
+
+    def encender(self):
+        print(f"{self.modelo}: encendido")
+
+    def descripcion(self):
+        return "Equipo de oficina"
+
+# 2. Primera hija
+class Impresora(EquipoOficina):
+    def imprimir(self, documento):
+        print(f"Imprimiendo {documento}")
+
+    def descripcion(self):
+        return super().descripcion() + " + Impresora"
+
+# 3. Segunda hija
+class Escaner(EquipoOficina):
+    def escanear(self, documento):
+        print(f"Escaneando {documento}")
+
+    def descripcion(self):
+        return super().descripcion() + " + Escáner"
+
+# 4. Hija múltiple (Hereda de ambas)
+class Multifuncion(Impresora, Escaner):
+    # No necesita __init__ propio porque usa el de arriba del todo
+    
+    def fotocopiar(self, documento):
+        # Reutiliza los métodos de sus clases "padre"
+        self.escanear(documento)
+        self.imprimir(documento)
+
+    def descripcion(self):
+        return super().descripcion() + " + Multifunción"
+
+# --- Código de prueba del enunciado ---
+equipo = Multifuncion("OfiPro 300")
+equipo.encender()
+equipo.fotocopiar("contrato.pdf")
+print(equipo.descripcion())
+print([clase.__name__ for clase in Multifuncion.__mro__])
+Explicación en detalle
+1. Herencia múltiple class Hija(Padre1, Padre2):
+Al declarar class Multifuncion(Impresora, Escaner):, esta nueva clase gana instantáneamente acceso al método imprimir() de la primera y al método escanear() de la segunda. Por eso en fotocopiar podemos llamar directamente a self.escanear() y self.imprimir().
+
+2. El encadenamiento de super()
+Cada método descripcion() llama al de arriba usando super().descripcion() y le concatena (+) su propio texto. Esto crea una cadena de llamadas que viaja hasta la clase más alta (EquipoOficina), recoge el texto base y va sumando palabras a medida que "baja" de vuelta.
+
+🚨 Respuesta a la pregunta del profesor (El MRO)
+Esta es la respuesta exacta y técnica que tienes que dar si te preguntan esto:
+
+Pregunta: Explica por qué la descripción sale en ese orden. Relaciónalo con el MRO.
+
+Sale en ese orden por el MRO (Method Resolution Order), que es el camino estricto que sigue Python para buscar métodos: [Multifuncion -> Impresora -> Escaner -> EquipoOficina].
+
+Cuando llamo a equipo.descripcion(), la llamada viaja "hacia arriba" por la cadena de super() siguiendo exactamente el MRO:
+
+Multifuncion pasa el turno a Impresora.
+
+Impresora pasa el turno a Escaner (¡ojo! no a EquipoOficina directamente, Python respeta el MRO lateralmente).
+
+Escaner pasa el turno a EquipoOficina.
+
+EquipoOficina devuelve "Equipo de oficina".
+
+Al resolverse hacia atrás (de vuelta), se van concatenando los textos en orden inverso a la llamada: primero se añade " + Escáner", luego " + Impresora", y por último " + Multifunción".
+
+🚨 Tu plantilla para el examen (Herencia Múltiple y MRO)
+Plantilla A: Declarar herencia múltiple
+
+Python
+class ClaseHija(PadrePrincipal, PadreSecundario):
+    # Tendrá los métodos de ambos. 
+    # En caso de métodos con el mismo nombre, gana PadrePrincipal (el de la izquierda)
+    pass
+Plantilla B: Ver el orden de resolución (MRO)
+Si en el examen necesitas comprobar a qué clase va a llamar Python primero, usa esto:
+
+Python
+# Opción rápida
+print(NombreDeLaClase.__mro__)
+
+# Opción limpia (la que te pone el profe en el enunciado)
+print([c.__name__ for c in NombreDeLaClase.__mro__])
+¡Con esto cerramos el bloque de Herencia! Las clases ya no tienen secretos para ti. Cuando estés listo, dime cuál es el siguiente ejercicio del modelo de examen que quieres destripar (¿Vamos a la Sección 8 de excepciones o a la 9 de abstracción?).
+
+Cambia temporalmente Editor.permisos() para que devuelva directamente ["leer", "editar"], sin usar super(). ¿Qué permiso pierde el administrador? ¿Por qué?
+Cambia el orden de la herencia a class Administrador(Moderador, Editor). ¿Qué cambia en la salida?
+Sección 8. Refactorización: de código espagueti a clases
+
+Una agencia de viajes tiene un programa que funciona, pero está escrito todo seguido. Tiene listas con posiciones difíciles de recordar, muchos if/elif según el tipo de reserva y cálculos repetidos. Cada vez que la agencia quiere vender un nuevo tipo de reserva hay que tocar el programa en varios sitios.
+
+Tu tarea es reorganizarlo usando clases, objetos, herencia y polimorfismo, sin cambiar lo que muestra por pantalla.
+
+Parte A. Analizar el código original
+
+Copia el código, ejecútalo y anota su salida. No lo modifiques todavía.
+
+# Programa original de la agencia de viajes
+
+# Cada reserva: [tipo, cliente, cantidad, precio_unitario, destino]
+
+reservas = [
+
+["vuelo", "Ana López", 2, 120.0, "Madrid-Roma"],
+
+["hotel", "Luis Pérez", 3, 85.0, "Hotel Mar Azul"],
+
+["tren", "Marta Gil", 1, 45.0, "Madrid-Sevilla"],
+
+["vuelo", "Pablo Ruiz", 1, 300.0, "Madrid-Nueva York"],
+
+["hotel", "Eva Sanz", 2, 140.0, "Hotel Centro"],
+
+]
+
+
+
+total = 0
+
+for r in reservas:
+
+if r[0] == "vuelo":
+
+precio = r[2] * r[3]
+
+precio = precio + 25
+
+if r[3] > 200:
+
+precio = precio + r[2] * 30
+
+print("VUELO | " + r[1] + " | " + r[4] + " | " + str(r[2]) + " pasajeros | " + str(round(precio, 2)) + " €")
+
+elif r[0] == "hotel":
+
+precio = r[2] * r[3]
+
+if r[2] >= 3:
+
+precio = precio * 0.9
+
+precio = precio + r[2] * 1.5
+
+print("HOTEL | " + r[1] + " | " + r[4] + " | " + str(r[2]) + " noches | " + str(round(precio, 2)) + " €")
+
+elif r[0] == "tren":
+
+precio = r[2] * r[3]
+
+print("TREN | " + r[1] + " | " + r[4] + " | " + str(r[2]) + " billetes | " + str(round(precio, 2)) + " €")
+
+total = total + precio
+
+
+
+print("TOTAL AGENCIA: " + str(round(total, 2)) + " €")
+
+
+
+# Contar reservas de más de 200 €: hay que repetir todos los cálculos
+
+caras = 0
+
+for r in reservas:
+
+if r[0] == "vuelo":
+
+precio = r[2] * r[3] + 25
+
+if r[3] > 200:
+
+precio = precio + r[2] * 30
+
+elif r[0] == "hotel":
+
+precio = r[2] * r[3]
+
+if r[2] >= 3:
+
+precio = precio * 0.9
+
+precio = precio + r[2] * 1.5
+
+elif r[0] == "tren":
+
+precio = r[2] * r[3]
+
+if precio > 200:
+
+caras = caras + 1
+
+
+
+print("Reservas de más de 200 €: " + str(caras))
+
+Las reglas de precio que esconde el código son:
+
+TipoCantidad significaCálculo del precioVuelopasajerospasajeros × precio + 25 € de tasas. Si el billete cuesta más de 200 €, se suman 30 € por pasajero.Hotelnochesnoches × precio. Con 3 noches o más, un 10 % de descuento. Después se suma 1.5 € por noche de tasa turística.Trenbilletesbilletes × precio.Antes de programar, responde:
+
+¿Qué significan r[2] y r[3]? ¿Es fácil saberlo sin leer el comentario?
+¿En cuántos sitios distintos está escrita la regla del precio de un hotel?
+Si mañana la agencia vende cruceros, ¿cuántas partes del programa habría que tocar?
+Parte B. Crear la superclase
+
+Crea una clase Reserva con:
+
+Atributos: cliente, destino, cantidad y precio_unitario.
+Método precio_base(): devuelve cantidad × precio unitario.
+Método precio_total(): en la superclase devuelve el precio base.
+Método unidad(): devuelve el texto de la unidad, por ejemplo "unidades".
+Método __str__: devuelve la línea completa con el formato del programa original. El tipo (VUELO, HOTEL…) se obtiene a partir del nombre de la clase, y la unidad, con unidad().
+Parte C. Crear las subclases
+
+Crea ReservaVuelo, ReservaHotel y ReservaTren. Cada una debe:
+
+sobrescribir unidad();
+sobrescribir precio_total() solo si lo necesita, reutilizando precio_base() o super().precio_total() en lugar de repetir la multiplicación.
+Pista para el tipo: si la clase se llama ReservaVuelo, puedes obtener "VUELO" con type(self).__name__.replace("Reserva", "").upper().
+
+Parte D. Crear una clase que agrupe las reservas (composición)
+
+Crea una clase Agencia que contenga una lista de reservas y tenga estos métodos:
+
+agregar(reserva);
+mostrar(), que imprime cada reserva;
+total(), que devuelve la suma de los precios totales;
+contar_superiores_a(importe), que devuelve cuántas reservas superan ese importe.
+Parte E. Reescribir el programa principal
+
+agencia = Agencia()
+
+agencia.agregar(ReservaVuelo("Ana López", "Madrid-Roma", 2, 120.0))
+
+agencia.agregar(ReservaHotel("Luis Pérez", "Hotel Mar Azul", 3, 85.0))
+
+agencia.agregar(ReservaTren("Marta Gil", "Madrid-Sevilla", 1, 45.0))
+
+agencia.agregar(ReservaVuelo("Pablo Ruiz", "Madrid-Nueva York", 1, 300.0))
+
+agencia.agregar(ReservaHotel("Eva Sanz", "Hotel Centro", 2, 140.0))
+
+
+
+agencia.mostrar()
+
+print(f"TOTAL AGENCIA:{round(agencia.total(), 2)} €")
+
+print(f"Reservas de más de 200 €:{agencia.contar_superiores_a(200)}")
+
+Salida esperada (idéntica a la del programa original)
+
+VUELO | Ana López | Madrid-Roma | 2 pasajeros | 265.0 €
+
+HOTEL | Luis Pérez | Hotel Mar Azul | 3 noches | 234.0 €
+
+TREN | Marta Gil | Madrid-Sevilla | 1 billetes | 45.0 €
+
+VUELO | Pablo Ruiz | Madrid-Nueva York | 1 pasajeros | 355.0 €
+
+HOTEL | Eva Sanz | Hotel Centro | 2 noches | 283.0 €
+
+TOTAL AGENCIA: 1182.0 €
+
+Reservas de más de 200 €: 4
+
+Parte F. Ampliación
+
+La agencia empieza a vender cruceros. La cantidad son los camarotes y el precio es camarotes × precio más un 12 % de tasas portuarias. Crea ReservaCrucero y añade esta reserva:
+
+agencia.agregar(ReservaCrucero("Jorge Vidal", "Crucero Mediterráneo", 1, 900.0))
+
+Salida esperada (solo las líneas nuevas o que cambian)
+
+CRUCERO | Jorge Vidal | Crucero Mediterráneo | 1 camarotes | 1008.0 €
+
+TOTAL AGENCIA: 2190.0 €
+
+Reservas de más de 200 €: 5
+
+Restricciones
+
+En el programa final no puede quedar ningún if/elif que pregunte por el tipo de reserva.
+No se puede usar isinstance() para decidir cómo calcular el precio.
+El cálculo de cada tipo de reserva debe estar escrito en un único sitio.
+Para añadir el crucero no debes modificar ni Reserva ni Agencia.
+Pregunta final: compara tu respuesta a la pregunta 3 de la Parte A con lo que has tenido que hacer en la Parte F. ¿Qué ha cambiado?
+
+Sección 9. Ejercicio integrador: restaurante de comida a domicilio
+
+Este es el ejercicio definitivo de diseño de software. Te enseña por qué usamos clases en la vida real. Vas a coger un código asqueroso ("espagueti") que funciona pero es inmanejable, y lo vas a convertir en una obra de arte orientada a objetos.
+
+Voy a darte el código completo refactorizado (Partes B, C, D, E y F) y las respuestas a las preguntas teóricas de la Parte A y la Pregunta final.
+
+Parte A: Análisis del código original (Respuestas a las preguntas)
+¿Qué significan r[2] y r[3]?
+En el código original, r[2] es la cantidad (billetes, noches, etc.) y r[3] es el precio unitario. Es muy difícil saberlo sin el comentario inicial, porque en una lista, un número como r[2] no te dice nada sobre su significado real.
+
+¿En cuántos sitios está escrita la regla del precio de un hotel?
+Está escrita en dos sitios distintos: una vez en el primer bucle for (para imprimir la lista y sumar el total), y otra vez exactamente igual en el segundo bucle for (para contar las reservas mayores a 200€). Si el descuento cambia del 10% al 15%, hay que acordarse de cambiarlo en ambos sitios, o el programa se romperá.
+
+Si venden cruceros, ¿cuántas partes habría que tocar?
+Habría que tocar el programa en tres sitios: añadir una nueva lista de datos arriba, añadir un elif r[0] == "crucero": en el primer bucle for, y añadir otro elif idéntico en el segundo bucle for.
+
+Partes B, C, D, E y F: El Código Refactorizado
+Copia y pega este bloque en tu entorno. Es la solución completa y elegante.
+
+Python
+# --- PARTE B. LA SUPERCLASE ---
+class Reserva:
+    def __init__(self, cliente, destino, cantidad, precio_unitario):
+        self.cliente = cliente
+        self.destino = destino
+        self.cantidad = cantidad
+        self.precio_unitario = precio_unitario
+
+    def precio_base(self):
+        return self.cantidad * self.precio_unitario
+
+    def precio_total(self):
+        return self.precio_base()
+
+    def unidad(self):
+        return "unidades"
+
+    def __str__(self):
+        # El truco para extraer "VUELO", "HOTEL", etc., automáticamente del nombre de la clase
+        tipo = type(self).__name__.replace("Reserva", "").upper()
+        # :.1f o round() - usamos str() para imitar exactamente la salida del original
+        precio_redondeado = str(round(self.precio_total(), 2))
+        return f"{tipo} | {self.cliente} | {self.destino} | {self.cantidad} {self.unidad()} | {precio_redondeado} €"
+
+
+# --- PARTE C. LAS SUBCLASES ---
+class ReservaVuelo(Reserva):
+    def unidad(self):
+        return "pasajeros"
+
+    def precio_total(self):
+        # Base + 25 de tasas fijas
+        precio = self.precio_base() + 25
+        # Penalización si el billete es caro
+        if self.precio_unitario > 200:
+            precio += (self.cantidad * 30)
+        return precio
+
+class ReservaHotel(Reserva):
+    def unidad(self):
+        return "noches"
+
+    def precio_total(self):
+        precio = self.precio_base()
+        # 10% de descuento si son 3 noches o más
+        if self.cantidad >= 3:
+            precio = precio * 0.90
+        # Tasa turística de 1.5 por noche
+        precio += (self.cantidad * 1.5)
+        return precio
+
+class ReservaTren(Reserva):
+    def unidad(self):
+        return "billetes"
+    # No hace falta sobrescribir precio_total() porque coincide con el precio_base() del padre
+
+
+# --- PARTE F. AMPLIACIÓN (Cruceros) ---
+# Fíjate lo fácil que es añadir un nuevo tipo de reserva ahora
+class ReservaCrucero(Reserva):
+    def unidad(self):
+        return "camarotes"
+
+    def precio_total(self):
+        return self.precio_base() * 1.12
+
+
+# --- PARTE D. LA CLASE AGENCIA (Composición) ---
+class Agencia:
+    def __init__(self):
+        self.reservas = []
+
+    def agregar(self, reserva):
+        self.reservas.append(reserva)
+
+    def mostrar(self):
+        for reserva in self.reservas:
+            print(reserva)
+
+    def total(self):
+        # Usamos list comprehension + sum, como aprendimos en la Sección 7
+        return sum([reserva.precio_total() for reserva in self.reservas])
+
+    def contar_superiores_a(self, importe):
+        # Filtramos con list comprehension y contamos su longitud
+        return len([reserva for reserva in self.reservas if reserva.precio_total() > importe])
+
+
+# --- PARTE E. EL PROGRAMA PRINCIPAL ---
+agencia = Agencia()
+agencia.agregar(ReservaVuelo("Ana López", "Madrid-Roma", 2, 120.0))
+agencia.agregar(ReservaHotel("Luis Pérez", "Hotel Mar Azul", 3, 85.0))
+agencia.agregar(ReservaTren("Marta Gil", "Madrid-Sevilla", 1, 45.0))
+agencia.agregar(ReservaVuelo("Pablo Ruiz", "Madrid-Nueva York", 1, 300.0))
+agencia.agregar(ReservaHotel("Eva Sanz", "Hotel Centro", 2, 140.0))
+
+# Parte F (Añadir crucero)
+agencia.agregar(ReservaCrucero("Jorge Vidal", "Crucero Mediterráneo", 1, 900.0))
+
+agencia.mostrar()
+print(f"TOTAL AGENCIA: {round(agencia.total(), 2)} €")
+print(f"Reservas de más de 200 €: {agencia.contar_superiores_a(200)}")
+Explicación en detalle para el examen
+El fin del código espagueti:
+En el código original, si queríamos saber el precio de un hotel, teníamos que buscar la palabra "hotel" entre un mar de if/elif. Ahora, si hay un problema con el precio del hotel, vamos directamente a class ReservaHotel y modificamos sus 4 líneas. Nada más.
+
+Polimorfismo absoluto en la clase Agencia:
+Fíjate en el método total() de la Agencia. Simplemente dice reserva.precio_total(). La Agencia no tiene ni idea de si está cobrando un vuelo, un hotel o un crucero. No le importa. Ella da la orden de cobrar, y gracias al polimorfismo, cada objeto aplica su propia matemática.
+
+__str__ superpoderoso en la clase Padre:
+El método __str__ está escrito una sola vez en Reserva. Usa el truco type(self).__name__ para deducir de qué tipo de reserva estamos hablando y llama a self.unidad(). Como cada hija ha sobrescrito unidad() para devolver "noches", "pasajeros" o "camarotes", la frase sale perfecta para todas, sin repetir ni una línea de código.
+
+Respuesta a la Pregunta Final (Parte F)
+Pregunta: Compara tu respuesta a la pregunta 3 de la Parte A con lo que has tenido que hacer en la Parte F. ¿Qué ha cambiado?
+
+Lo que ha cambiado radicalmente es que ahora el código es escalable mediante herencia.
+
+En la Parte A (código original), para añadir cruceros tenía que buscar todos los bucles for del programa y añadir un nuevo elif r[0] == 'crucero' en cada uno de ellos, repitiendo la lógica matemática varias veces.
+
+En la Parte F, gracias al polimorfismo, las clases Reserva y Agencia y los bucles del programa principal se quedan completamente intactos. Lo único que he tenido que hacer es crear una nueva cápsula aislada (class ReservaCrucero), definir su regla matemática dentro, y añadir el objeto a la agencia. El resto del sistema absorbe el nuevo tipo automáticamente.
+
+Este ejercicio es el resumen perfecto de todo lo que has aprendido. ¿Pasamos a destrozar la Sección 9 (el restaurante de comida a domicilio) que es el reto final del modelo?
+
+Ejercicio 1.1 · El contador de tiendas
+
+class Tienda:
+
+total_tiendas = 0
+
+
+
+def __init__(self, nombre):
+
+self.nombre = nombre
+
+Tienda.total_tiendas += 1
+
+
+
+t1 = Tienda("Centro")
+
+t2 = Tienda("Norte")
+
+t1.total_tiendas = 10
+
+
+
+print(Tienda.total_tiendas, t1.total_tiendas, t2.total_tiendas)
+
+Pregunta extra: ¿por qué t1 y t2 no muestran el mismo número?
+
+Ejercicio 1.2 · Dos listas que parecen tres
+
+pedidos_a = [101, 102, 103]
+
+pedidos_b = pedidos_a
+
+pedidos_c = pedidos_a[:]
+
+
+
+pedidos_b.append(104)
+
+pedidos_c.append(999)
+
+
+
+print(pedidos_a)
+
+print(pedidos_b)
+
+print(pedidos_c)
+
+print(pedidos_a is pedidos_b, pedidos_a is pedidos_c, pedidos_a == pedidos_b)
+
+Ejercicio 1.3 · Filtrar o clasificar
+
+valoraciones = [4, 7, 5, 9, 3]
+
+
+
+resultado_1 = [v for v in valoraciones if v >= 5]
+
+resultado_2 = ["POSITIVA" if v >= 5 else "NEGATIVA" for v in valoraciones]
+
+
+
+print(resultado_1)
+
+print(resultado_2)
+
+Pregunta extra: ¿por qué el if está en una posición distinta en cada comprehension?
+
+Ejercicio 1.4 · Cuenta atrás
+
+def cuenta_atras(n):
+
+if n == 0:
+
+return "¡Despegue!"
+
+return str(n) + " " + cuenta_atras(n - 1)
+
+
+
+print(cuenta_atras(3))
+
+Pregunta extra: ¿qué ocurriría si se borran las dos líneas del if?
+
+Ejercicio 1.5 · Recepción de un hotel
+
+class Huesped:
+
+def bienvenida(self):
+
+return "Bienvenido"
+
+
+
+class HuespedVIP(Huesped):
+
+def bienvenida(self):
+
+return super().bienvenida() + " - Tiene champán en la habitación"
+
+
+
+class HuespedGrupo(Huesped):
+
+def bienvenida(self):
+
+return "Bienvenidos, el guía les espera en el vestíbulo"
+
+
+
+for huesped in [Huesped(), HuespedVIP(), HuespedGrupo()]:
+
+print(huesped.bienvenida())
+
+Ejercicio 1.6 · Atributos con guiones bajos
+
+class Tarjeta:
+
+def __init__(self):
+
+self.titular = "Ana"
+
+self._saldo = 500
+
+self.__pin = 1234
+
+
+
+t = Tarjeta()
+
+print(t.titular) # Línea A
+
+print(t._saldo) # Línea B
+
+print(t._Tarjeta__pin) # Línea C
+
+print(t.__pin) # Línea D
+
+Indica qué líneas funcionan, cuál produce un error y de qué tipo es ese error.
+
+Ejercicio 1.7 · Funciones que fabrican funciones
+
+def crear_etiqueta(prefijo):
+
+def etiquetar(codigo):
+
+return prefijo + "-" + str(codigo)
+
+return etiquetar
+
+
+
+factura = crear_etiqueta("FAC")
+
+albaran = crear_etiqueta("ALB")
+
+
+
+print(factura(15), albaran(7), factura(albaran(1)))
+
+Ejercicio 1.8 · La cafetería y la herencia múltiple
+
+class Bebida:
+
+def ingredientes(self):
+
+return ["café"]
+
+
+
+class ConLeche(Bebida):
+
+def ingredientes(self):
+
+return super().ingredientes() + ["leche"]
+
+
+
+class ConHielo(Bebida):
+
+def ingredientes(self):
+
+return super().ingredientes() + ["hielo"]
+
+
+
+class Frappe(ConLeche, ConHielo):
+
+def ingredientes(self):
+
+return super().ingredientes() + ["nata"]
+
+
+
+class CafeFrio(ConHielo, ConLeche):
+
+pass
+
+
+
+print(Frappe().ingredientes())
+
+print(CafeFrio().ingredientes())
+
+print([clase.__name__ for clase in Frappe.__mro__])
+
+Preguntas extra:
+
+Dentro de ConLeche, super() no llama a Bebida. ¿A qué clase llama en un objeto Frappe y por qué?
+¿Por qué "café" aparece una sola vez si ConLeche y ConHielo heredan las dos de Bebida?
+¿Por qué cambia el orden de los ingredientes en CafeFrio?
+Ejercicio 1.1 · El contador de tiendas
+Salida exacta:
+
+Plaintext
+2 10 2
+Respuesta a la pregunta extra:
+t1 y t2 no muestran el mismo número porque al hacer t1.total_tiendas = 10, estás creando un atributo de instancia (específico solo para el objeto t1) que "tapa" o enmascara al atributo de clase. Como a t2 no le has creado ningún atributo propio, sigue leyendo el atributo global compartido de la clase Tienda, que vale 2 (ya que se sumó 1 al crear t1 y otro al crear t2).
+
+Ejercicio 1.2 · Dos listas que parecen tres
+Salida exacta:
+
+Plaintext
+[101, 102, 103, 104]
+[101, 102, 103, 104]
+[101, 102, 103, 999]
+True False True
+Explicación del patrón:
+
+pedidos_b = pedidos_a no crea una lista nueva, es simplemente una etiqueta diferente apuntando a la misma lista (por eso pedidos_a is pedidos_b es True). Si cambias b, cambia a.
+
+pedidos_c = pedidos_a[:] crea una copia exacta pero independiente en la memoria (por eso pedidos_a is pedidos_c es False). Al modificar c, no afecta a las demás.
+
+pedidos_a == pedidos_b es True porque sus valores internos son idénticos.
+
+Ejercicio 1.3 · Filtrar o clasificar
+Salida exacta:
+
+Plaintext
+[7, 5, 9]
+['NEGATIVA', 'POSITIVA', 'POSITIVA', 'POSITIVA', 'NEGATIVA']
+Respuesta a la pregunta extra:
+El if cambia de posición según su función:
+
+En resultado_1, el if está al final porque actúa como un filtro: decide si el elemento se guarda o se descarta (elimina los menores de 5).
+
+En resultado_2, el if/else está al principio porque actúa como una transformación: no elimina ningún elemento, sino que decide qué valor alternativo guardar ("POSITIVA" o "NEGATIVA") para cada uno de ellos.
+
+Ejercicio 1.4 · Cuenta atrás
+Salida exacta:
+
+Plaintext
+3 2 1 ¡Despegue!
+Respuesta a la pregunta extra:
+Si se borran las dos líneas del if, se produciría un error de ejecución conocido como Stack Overflow (o RecursionError en Python). La función entraría en un bucle infinito llamándose a sí misma con números negativos (-1, -2, -3...) porque habría perdido su caso base (la condición de parada).
+
+Ejercicio 1.5 · Recepción de un hotel
+Salida exacta:
+
+Plaintext
+Bienvenido
+Bienvenido - Tiene champán en la habitación
+Bienvenidos, el guía les espera en el vestíbulo
+Explicación del patrón (Polimorfismo y Herencia):
+El primer objeto usa el método original. El segundo (HuespedVIP) usa super().bienvenida() para reciclar el texto original y añadirle un extra. El tercero (HuespedGrupo) ignora por completo el método del padre y lo reescribe desde cero.
+
+Ejercicio 1.6 · Atributos con guiones bajos
+Respuesta a las líneas:
+
+Línea A (t.titular): Funciona (imprime Ana). Es un atributo público.
+
+Línea B (t._saldo): Funciona (imprime 500). Un solo guion bajo es solo una advertencia visual para otros programadores ("no tocar"), pero Python no prohíbe leerlo.
+
+Línea C (t._Tarjeta__pin): Funciona (imprime 1234). Así es como Python renombra internamente los atributos privados (mangling) para evitar que se pisen.
+
+Línea D (t.__pin): Produce un error de tipo AttributeError. Python oculta el atributo si intentas llamarlo directamente desde fuera de la clase con el doble guion bajo.
+
+Ejercicio 1.7 · Funciones que fabrican funciones
+Salida exacta:
+
+Plaintext
+FAC-15 ALB-7 FAC-ALB-1
+Explicación del patrón (Closures):
+Las funciones devueltas "recuerdan" el prefijo con el que fueron creadas.
+El último caso (factura(albaran(1))) se ejecuta de dentro hacia afuera: primero albaran(1) devuelve "ALB-1", y ese texto se le pasa a factura(), que le añade "FAC-" delante.
+
+Ejercicio 1.8 · La cafetería y la herencia múltiple
+Salida exacta:
+
+Plaintext
+['café', 'hielo', 'leche', 'nata']
+['café', 'leche', 'hielo']
+['Frappe', 'ConLeche', 'ConHielo', 'Bebida', 'object']
+Respuestas a las preguntas extra:
+
+Dentro de ConLeche, super() no llama a Bebida. ¿A qué clase llama en un objeto Frappe y por qué?
+Llama a la clase ConHielo. Esto ocurre por el MRO (Method Resolution Order). En herencia múltiple, super() no significa estrictamente "ve a mi padre", sino "ve a la siguiente clase en el orden de resolución". Al declarar class Frappe(ConLeche, ConHielo), el orden de prioridad viaja lateralmente de izquierda a derecha antes de subir a la superclase superior.
+
+¿Por qué "café" aparece una sola vez si ambas heredan de Bebida?
+Porque el algoritmo de Python (C3 Linearization) asegura que en el MRO, la superclase común (Bebida) se coloque al final de la cadena y se ejecute una única vez.
+
+¿Por qué cambia el orden de los ingredientes en CafeFrio?
+Porque al declarar class CafeFrio(ConHielo, ConLeche), hemos invertido el orden de las clases en los paréntesis. Esto altera el MRO lateral: ahora ConHielo tiene prioridad y su super() saltará a ConLeche antes de subir a Bebida.
+
+Gemini puede mostrar información imprecisa (incluidos datos sobre personas), así que verifica sus respuestas.
+
+Política de Privacidad de GoogleSe abre en una ventana nueva
+Términos del Servicio de GoogleSe abre en una ventana nueva
+Tu privacidad y las aplicaciones de GeminiSe abre en una ventana nueva
